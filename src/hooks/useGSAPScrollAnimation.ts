@@ -128,7 +128,7 @@ type ScrollAnimationOptions = {
 export const useGSAPScrollAnimation = (
   element: React.RefObject<HTMLElement | null>,
   options: ScrollAnimationOptions = {},
-  dependencies: any,
+  dependencies: unknown[] = [],
 ) => {
   const animation = useRef<gsap.core.Tween | null>(null)
   const scrollTrigger = useRef<ScrollTrigger | null>(null)
@@ -243,7 +243,7 @@ useEffect(() => {
       scrollTrigger.current.kill()
     }
   }
-}, [element, options, ...dependencies])
+}, [element, options, ...dependencies]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return { animation, scrollTrigger }
 }

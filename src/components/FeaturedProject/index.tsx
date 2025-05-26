@@ -275,7 +275,7 @@ export const FeaturedProject: React.FC = () => {
       <div ref={headingRef} className="text-center mb-12">
         <h2 className="text-xl font-semibold mb-2">Featured Projects</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Projects I've collaborated on and contributed to significantly
+          Projects I have collaborated on and contributed to significantly
         </p>
       </div>
 
