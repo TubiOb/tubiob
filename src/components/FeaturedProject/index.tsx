@@ -151,7 +151,7 @@ export const FeaturedProject: React.FC = () => {
       <section ref={sectionRef} className="py-16">
         <div className="text-center mb-12">
           <h2 className="text-xl font-semibold mb-2">Other Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Loading additional projects...</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">Loading featured projects...</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2].map((i) => (
@@ -174,103 +174,6 @@ export const FeaturedProject: React.FC = () => {
 
 
   return (
-    // <motion.div
-    //   initial={{ opacity: 0, y: 50 }}
-    //   animate={{ opacity: 1, y: 0 }}
-    //   transition={{ duration: 1 }}
-    //   className="bg-background rounded-lg shadow-lg overflow-hidden my-40 flex"
-    // >
-    //   <div className="md:flex flex-col">
-    //     <div className="md:flex-shrink-0 relative h-48 md:h-auto md:w-48">
-    //       <Image src={Hue} alt="Featured Projects" className="object-cover" />
-    //     </div>
-    //     <div className="p-8">
-          
-    //       <a
-    //         href="#"
-    //         className="block mt-1 text-lg leading-tight font-medium text-black dark:text-white hover:underline"
-    //       >
-    //         VitalGoods E-commerce Platform
-    //       </a>
-    //       <p className="mt-2 text-gray-500 dark:text-gray-400">
-    //         A full-featured e-commerce platform for fitness equipment, built with React, Next.js, and integrated with
-    //         Stripe for payments.
-    //       </p>
-    //       <div className="mt-4 flex space-x-3">
-    //         <Button asChild variant="outline">
-    //           <a href="https://vitalgoods.netlify.app/" target="_blank" rel="noopener noreferrer">
-    //             <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-    //           </a>
-    //         </Button>
-    //         <Button asChild variant="outline">
-    //           <a href="https://github.com/yourusername/vitalgoods" target="_blank" rel="noopener noreferrer">
-    //             <Github className="mr-2 h-4 w-4" /> View Code
-    //           </a>
-    //         </Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="md:flex flex-col">
-    //     <div className="md:flex-shrink-0 relative h-48 md:h-auto md:w-48">
-    //       <Image src={Hue} alt="Featured Projects" className="object-cover" />
-    //     </div>
-    //     <div className="p-8">
-          
-    //       <a
-    //         href="#"
-    //         className="block mt-1 text-lg leading-tight font-medium text-black dark:text-white hover:underline"
-    //       >
-    //         VitalGoods E-commerce Platform
-    //       </a>
-    //       <p className="mt-2 text-gray-500 dark:text-gray-400">
-    //         A full-featured e-commerce platform for fitness equipment, built with React, Next.js, and integrated with
-    //         Stripe for payments.
-    //       </p>
-    //       <div className="mt-4 flex space-x-3">
-    //         <Button asChild variant="outline">
-    //           <a href="https://vitalgoods.netlify.app/" target="_blank" rel="noopener noreferrer">
-    //             <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-    //           </a>
-    //         </Button>
-    //         <Button asChild variant="outline">
-    //           <a href="https://github.com/yourusername/vitalgoods" target="_blank" rel="noopener noreferrer">
-    //             <Github className="mr-2 h-4 w-4" /> View Code
-    //           </a>
-    //         </Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="md:flex flex-col">
-    //     <div className="md:flex-shrink-0 relative h-48 md:h-auto md:w-48">
-    //       <Image src={Hue} alt="Featured Projects" className="object-cover" />
-    //     </div>
-    //     <div className="p-8">
-          
-    //       <a
-    //         href="#"
-    //         className="block mt-1 text-lg leading-tight font-medium text-black dark:text-white hover:underline"
-    //       >
-    //         VitalGoods E-commerce Platform
-    //       </a>
-    //       <p className="mt-2 text-gray-500 dark:text-gray-400">
-    //         A full-featured e-commerce platform for fitness equipment, built with React, Next.js, and integrated with
-    //         Stripe for payments.
-    //       </p>
-    //       <div className="mt-4 flex space-x-3">
-    //         <Button asChild variant="outline">
-    //           <a href="https://vitalgoods.netlify.app/" target="_blank" rel="noopener noreferrer">
-    //             <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-    //           </a>
-    //         </Button>
-    //         <Button asChild variant="outline">
-    //           <a href="https://github.com/yourusername/vitalgoods" target="_blank" rel="noopener noreferrer">
-    //             <Github className="mr-2 h-4 w-4" /> View Code
-    //           </a>
-    //         </Button>
-    //       </div>
-    //     </div>
-    //   </div>      
-    // </motion.div>
     <section ref={sectionRef} className="py-16">
       <div ref={headingRef} className="text-center mb-12">
         <h2 className="text-xl font-semibold mb-2">Featured Projects</h2>

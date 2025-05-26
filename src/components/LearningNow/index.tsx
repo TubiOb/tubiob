@@ -137,6 +137,7 @@ export const LearningNow: React.FC = () => {
     }
   }, [])
 
+  
   return (
     <div ref={sectionRef} className="mt-16">
       <h3 ref={titleRef} className="text-xl font-bold mb-8">

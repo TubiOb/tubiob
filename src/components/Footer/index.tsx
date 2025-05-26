@@ -5,12 +5,14 @@ import { useEffect, useRef } from "react";
 import { Github, Linkedin, Twitter } from "lucide-react"
 // import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 // import { useAnimation } from "@/context/AnimationContext";
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 export const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null)
+  const pathname = usePathname();
 
   // const { registerAnimation } = useAnimation()
 
@@ -59,7 +61,13 @@ export const Footer: React.FC = () => {
     }, footerRef)
 
     return () => ctx.revert()
-  }, [])
+  }, []);
+
+
+  const isActive = (path: string) => {
+    return pathname === path;
+  }
+  
 
 
   return (
@@ -69,16 +77,16 @@ export const Footer: React.FC = () => {
         <p className="text-gray-600 dark:text-gray-400 mb-4">Frontend Developer</p>
         <nav className="mb-4">
           <div className="flex justify-center space-x-4">
-            <Link href="/" className="text-[var(--light-text-color)] hover:text-secondary">
+            <Link href="/" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/') ? 'text-muted' : ''} `}>
               Home
             </Link>
-            <Link href="/about" className="text-[var(--light-text-color)] hover:text-secondary">
+            <Link href="/about" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/about') ? 'text-muted' : ''} `}>
               About
             </Link>
-            <Link href="/skills" className="text-[var(--light-text-color)] hover:text-secondary">
+            <Link href="/skills" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/skills') ? 'text-muted' : ''} `}>
               Skills & Portfolio
             </Link>
-            <Link href="/contact" className="text-[var(--light-text-color)] hover:text-secondary">
+            <Link href="/contact" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/contact') ? 'text-muted' : ''} `}>
               Contact
             </Link>
           </div>

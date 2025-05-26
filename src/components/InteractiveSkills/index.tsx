@@ -79,32 +79,41 @@ const skills: SkillCategory[] = [
 
 export const InteractiveSkills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const skillsRef = useRef<HTMLDivElement>(null)
+  const skillsRef = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
     if (typeof window === "undefined") return
 
     gsap.registerPlugin(ScrollTrigger)
 
-    if (skillsRef.current) {
-      const skillItems = skillsRef.current.querySelectorAll(".skill-item")
+    const allSkills = skills.flatMap(category => category.skills);
+    skillsRef.current = skillsRef.current.slice(0, allSkills.length)
 
-      gsap.fromTo(
-        skillItems,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: skillsRef.current,
-            start: "top 80%",
-            toggleActions: "play reverse play reverse",
+    if (sectionRef.current) {
+
+      allSkills.forEach((skill, index) => {
+        const skillElement = skillsRef.current[index];
+        if (!skillElement) return
+
+        gsap.fromTo(skillElement,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: 0.2 + index * 0.05,
+            ease: "power2.out",
+            // stagger: 0.15,
+            scrollTrigger: {
+              trigger: skillElement,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              once: false,
+              invalidateOnRefresh: true,
+            },
           },
-        },
-      )
+        )
+      })
     }
 
     return () => {
@@ -142,23 +151,37 @@ export const InteractiveSkills: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <TextReveal className="text-xl font-semibold text-center mb-12">Technical Skills</TextReveal>
 
-        <div ref={skillsRef} className="space-y-12">
+        <div className="space-y-12">
           {skills.map((category) => (
             <div key={category.name} className="space-y-6">
               <h3 className="text-lg font-medium mb-4">{category.name}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                {category.skills.map((skill) => (
-                  <motion.div
+                {category.skills.map((skill, index) => (
+                  <div
                     key={skill.name}
+                    ref={(el) => {
+                      // Adjust ref indexing to match the flattened allSkills array for GSAP
+                      const flatIndex = skills.flatMap(c => c.skills).findIndex(s => s.name === skill.name);
+                      if (el && flatIndex !== -1) {
+                        skillsRef.current[flatIndex] = el;
+                      }
+                    }}
                     className="skill-item flex flex-col items-center justify-center p-4 bg-background rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow duration-300"
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: `0 0 15px ${skill.color}40`,
+                    style={
+                      {
+                        "--skill-color": skill.color,
+                      } as React.CSSProperties
+                    }
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = `0 0 15px ${skill.color}40`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = ""
                     }}
                   >
                     <div className="text-secondary mb-3" style={{ color: skill.color }}>{skill.icon}</div>
                     <span className="text-sm font-normal text-center">{skill.name}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>

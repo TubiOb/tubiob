@@ -23,9 +23,11 @@ export const OtherProject: React.FC = () => {
       try {
         const nonFeaturedProjects = projects.filter((project) => !project.featured)
         setOtherProjects(nonFeaturedProjects)
-      } catch (error) {
+      }
+      catch (error) {
         console.error("Error loading projects:", error)
-      } finally {
+      }
+      finally {
         setIsLoading(false)
       }
     }, 0)
@@ -33,79 +35,140 @@ export const OtherProject: React.FC = () => {
     return () => clearTimeout(timer)
   }, [])
 
+
   // Initialize GSAP
+  // useEffect(() => {
+  //   if (typeof window === "undefined" || isLoading) return
+
+  //   gsap.registerPlugin(ScrollTrigger)
+
+  //   // Animate heading
+  //   if (headingRef.current) {
+  //     gsap.fromTo(
+  //       headingRef.current,
+  //       { opacity: 0, y: 30 },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 1,
+  //         scrollTrigger: {
+  //           trigger: headingRef.current,
+  //           start: "top 80%",
+  //           toggleActions: "play reverse play pause",
+  //         },
+  //       },
+  //     )
+  //   }
+
+  //   // Animate projects with stagger
+  //   if (projectsRef.current) {
+  //     const projectCards = projectsRef.current.querySelectorAll(".project-card")
+
+  //     gsap.fromTo(projectCards,
+  //       { opacity: 0, y: 50 },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 0.8,
+  //         stagger: 0.15,
+  //         ease: "power2.out",
+  //         scrollTrigger: {
+  //           trigger: projectsRef.current,
+  //           start: "top 85%",
+  //           toggleActions: "play none none reverse",
+  //           once: false,
+  //           invalidateOnRefresh: true,
+  //         },
+  //       },
+  //     )
+  //   }
+
+  //   return () => {
+  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+  //   }
+  // }, [isLoading, otherProjects])
+
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (typeof window === "undefined" || isLoading) return
 
     gsap.registerPlugin(ScrollTrigger)
 
-    // Animate heading
-    if (headingRef.current) {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 30 },
-        {
+    const ctx = gsap.context(() => {
+      // Set initial states to prevent flicker
+      if (headingRef.current) {
+        gsap.set(headingRef.current, { opacity: 0, y: 30 })
+      }
+
+      if (projectsRef.current) {
+        const projectCards = projectsRef.current.querySelectorAll(".project-card")
+        gsap.set(projectCards, { opacity: 0, y: 50 })
+      }
+
+      // Animate heading
+      if (headingRef.current) {
+        gsap.to(headingRef.current, {
           opacity: 1,
           y: 0,
           duration: 1,
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      )
-    }
-
-    // Animate projects with stagger
-    if (projectsRef.current) {
-      const projectCards = projectsRef.current.querySelectorAll(".project-card")
-
-      gsap.fromTo(
-        projectCards,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.2,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: projectsRef.current,
-            start: "top 70%",
-            toggleActions: "play none none none",
+            trigger: headingRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+            once: false,
+            invalidateOnRefresh: true,
           },
-        },
-      )
-    }
+        })
+      }
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
+      // Animate projects with stagger
+      if (projectsRef.current) {
+        const projectCards = projectsRef.current.querySelectorAll(".project-card")
+
+        if (projectCards.length > 0) {
+          gsap.to(projectCards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: projectsRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+              once: false,
+              invalidateOnRefresh: true,
+            },
+          })
+        }
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
   }, [isLoading, otherProjects])
 
 
 
     if (isLoading) {
-        return (
-            <section ref={sectionRef} className="py-16">
-                <div className="text-center mb-12">
-                    <h2 className="text-xl font-semibold mb-2">Other Projects</h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">Loading additional projects...</p>
+      return (
+        <section ref={sectionRef} className="py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-xl font-semibold mb-2">Other Projects</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Loading personal projects...</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2].map((i) => (
+              <div key={i} className="bg-background rounded-lg shadow-lg h-80 animate-pulse">
+                <div className="h-52 bg-gray-300 dark:bg-gray-700 rounded-t-lg"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[1, 2].map((i) => (
-                        <div key={i} className="bg-background rounded-lg shadow-lg h-80 animate-pulse">
-                            <div className="h-52 bg-gray-300 dark:bg-gray-700 rounded-t-lg"></div>
-                            <div className="p-4">
-                                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        )
+              </div>
+            ))}
+          </div>
+        </section>
+      )
     }
 
       if (otherProjects.length === 0) {
