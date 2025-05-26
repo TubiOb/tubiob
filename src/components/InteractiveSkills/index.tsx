@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 import { useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -156,7 +156,7 @@ export const InteractiveSkills: React.FC = () => {
             <div key={category.name} className="space-y-6">
               <h3 className="text-lg font-medium mb-4">{category.name}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                {category.skills.map((skill, index) => (
+                {category.skills.map((skill) => (
                   <div
                     key={skill.name}
                     ref={(el) => {
