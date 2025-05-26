@@ -698,7 +698,7 @@ import { useAnimation } from "@/context/AnimationContext";
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { /* theme, */ setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);

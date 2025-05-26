@@ -198,7 +198,6 @@ export const About: React.FC = () => {
             start: "top 80%",
             end: "bottom 20%",
             toggleActions: "play reverse play pause",
-            markers: true,
           },
         },
       )
@@ -256,8 +255,8 @@ export const About: React.FC = () => {
               projects.
             </p>
             <p className="mb-4">
-              I'm a team player with excellent communication skills, I work collaboratively with designers, developers,
-              and clients to ensure that projects are delivered on time. I am eager to learn new skills that'll make me
+              I am a team player with excellent communication skills, I work collaboratively with designers, developers,
+              and clients to ensure that projects are delivered on time. I am eager to learn new skills that will make me
               a valuable asset to any team.
             </p>
             <p>

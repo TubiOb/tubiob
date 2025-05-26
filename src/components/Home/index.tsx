@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 import { FeaturedProject } from "./../FeaturedProject"
-import { Testimonials } from "./../Testimonials"
+// import { Testimonials } from "./../Testimonials"
 import Image from "next/image"
 import { TubiOb } from "../../../public/img"
 import { useGSAPScrollAnimation } from "@/hooks/useGSAPScrollAnimation";
@@ -159,7 +159,7 @@ export const Home: React.FC = () => {
               exitTo={{ y: -30, opacity: 0, duration: 0.8, ease: "power2.in" }}
               toggleActions="play pause play pause"
             >
-              I'm Obaloluwa Tubi.
+              Obaloluwa Tubi here.
             </TextReveal>
             <h2 className="text-2xl md:text-3xl font-normal mb-1">
               A <span className="text-[var(--text-color-green)]">Frontend Developer</span>,

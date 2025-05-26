@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useRef, useEffect, useState} from "react"
-import { motion } from "framer-motion"
-import { ExternalLink, Github, Code } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Hue } from "../../../public/img"
+// import { motion } from "framer-motion"
+// import { ExternalLink, Github, Code } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { Hue } from "../../../public/img"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Project, projects } from "@/lib/projects"
@@ -116,7 +116,7 @@ export const OtherProject: React.FC = () => {
         <section ref={sectionRef} className="py-16">
           <div ref={headingRef} className="text-center mb-12">
             <h2 className="text-xl font-semibold mb-2">Other Projects</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Additional projects and experiments I've worked on</p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Additional projects and experiments I have worked on</p>
           </div>
 
           <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

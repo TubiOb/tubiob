@@ -128,7 +128,7 @@ type ScrollAnimationOptions = {
 export const useGSAPScrollAnimation = (
   element: React.RefObject<HTMLElement | null>,
   options: ScrollAnimationOptions = {},
-  dependencies: any[] = [],
+  dependencies: any,
 ) => {
   const animation = useRef<gsap.core.Tween | null>(null)
   const scrollTrigger = useRef<ScrollTrigger | null>(null)

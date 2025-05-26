@@ -3,16 +3,16 @@
 import React from "react"
 import { useEffect, useRef } from "react";
 import { Github, Linkedin, Twitter } from "lucide-react"
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import Link from "next/link";
-import { useAnimation } from "@/context/AnimationContext";
+// import { useAnimation } from "@/context/AnimationContext";
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 export const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null)
 
-  const { registerAnimation } = useAnimation()
+  // const { registerAnimation } = useAnimation()
 
   // Register footer animation with low priority (-10)
   // useEffect(() => {

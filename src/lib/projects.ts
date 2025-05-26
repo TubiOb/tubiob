@@ -1,4 +1,4 @@
-import { Hivehub1, Hivehub2, Hivehub3, Shopify1, Shopify2, PlayCV, PlayCV1, PlayCV2, PlayCV3 } from "../../public/img"
+// import { Hivehub1, Hivehub2, Hivehub3, Shopify1, Shopify2, PlayCV, PlayCV1, PlayCV2, PlayCV3 } from "../../public/img"
 
 export type Project = {
   id: string

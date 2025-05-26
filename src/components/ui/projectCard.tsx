@@ -14,9 +14,9 @@ type ProjectCardProps = {
   index: number
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const cardRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+  // const imageRef = useRef<HTMLDivElement>(null)
 
   // Hover animation
   useEffect(() => {

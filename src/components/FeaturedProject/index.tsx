@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { ExternalLink, Github, Code } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Hue } from "../../../public/img"
+// import { motion } from "framer-motion"
+// import { ExternalLink, Github, Code } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { Hue } from "../../../public/img"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { getFeaturedProjects, Project, projects } from "@/lib/projects"
+import { /* getFeaturedProjects, */ Project, projects } from "@/lib/projects"
 import { ProjectCard } from "../ui/projectCard"
 
 export const FeaturedProject: React.FC = () => {

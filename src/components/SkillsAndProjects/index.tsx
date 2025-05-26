@@ -3,14 +3,6 @@
 import type React from "react"
 import { motion } from "framer-motion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  HashIcon as Html,
-  CodepenIcon as Css3,
-  CodepenIcon as Javascript,
-  BackpackIcon as Bootstrap,
-  Figma,
-  GitGraphIcon as Git,
-} from "lucide-react"
 import { InteractiveSkills } from "./../InteractiveSkills"
 import { OtherProject } from "../OtherProject"
 

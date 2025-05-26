@@ -6,7 +6,7 @@ import { useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { TextReveal } from "@/components/ui/textreveal"
-import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, Component, Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, Lock, TestTube, LineChart, Rocket, Workflow, } from "lucide-react"
+import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, /* Component, */ Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, /* Lock, TestTube, LineChart, */ Rocket, Workflow, } from "lucide-react"
 
 type Skill = {
   name: string

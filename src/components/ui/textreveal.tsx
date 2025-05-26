@@ -131,21 +131,22 @@ export const TextReveal: React.FC<TextRevealProps> = ({
   delay = 0,
   from = { y: 100, opacity: 0 },
   to = { y: 0, opacity: 1},
-  exitTo,
   trigger = true,
   toggleActions = 'play none none none'
 }) => {
   const textRef = useRef<HTMLDivElement>(null)
-  const splitRef = useRef<any>(null)
+  const splitRef = useRef<SplitText | null>(null)
 
   useEffect(() => {
-    if (typeof window === "undefined" || !textRef.current) return
+    const currentTextRef = textRef.current;
+
+    if (typeof window === "undefined" || !currentTextRef) return
 
     // Register plugins
     gsap.registerPlugin(ScrollTrigger, SplitText)
 
     // Create SplitText instance
-    splitRef.current = new SplitText(textRef.current, { type: "words,chars" })
+    splitRef.current = new SplitText(currentTextRef, { type: "words,chars" })
     const chars = splitRef.current.chars
 
     // Create animation
@@ -157,7 +158,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
         stagger,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: textRef.current,
+          trigger: currentTextRef,
           start: "top 80%",
           toggleActions,
         },
@@ -178,7 +179,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
       if (splitRef.current) splitRef.current.revert()
       if (trigger) {
         ScrollTrigger.getAll().forEach((st) => {
-          if (st.vars.trigger === textRef.current) {
+          if (st.vars.trigger === currentTextRef) {
             st.kill()
           }
         })
