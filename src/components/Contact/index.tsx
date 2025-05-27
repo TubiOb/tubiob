@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Mail, Send, AlertCircle, CheckCircle } from "lucide-react"
-import { sendContactEmail } from "@/app/api/emails/route"
+import { sendContactEmail } from "@/app/api/emails/action"
 import gsap from 'gsap'
 import { useAnimation } from "@/context/AnimationContext";
 

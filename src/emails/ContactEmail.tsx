@@ -1,4 +1,4 @@
-import { Body, Container, Head, Heading, Html, Preview, Section, Text } from "@react-email/components"
+import { Body, Container, Head, Heading, Hr, Html, Preview, Section, Text } from "@react-email/components"
 
 interface ContactEmailTemplateProps {
   name: string
@@ -22,7 +22,7 @@ export const ContactEmailTemplate = ({ name, email, message }: ContactEmailTempl
             <Section style={gridItem}>
               <Text style={label}>From</Text>
               <Text style={value}>{name}</Text>
-              <Text style={email}>{email}</Text>
+              <Text style={emailStyle}>{email}</Text>
             </Section>
           </Section>
 
@@ -41,7 +41,17 @@ export const ContactEmailTemplate = ({ name, email, message }: ContactEmailTempl
         </Section>
 
         <Section style={footer}>
-          <Text style={footerText}>Sent from your portfolio • {new Date().toLocaleDateString()}</Text>
+          <Hr style={footerHr} />
+          <Text style={footerText}>This message was automatically generated from your portfolio contact form.</Text>
+          <Text style={footerSubtext}>
+            Sent on{" "}
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </Text>
         </Section>
       </Container>
     </Body>
@@ -114,7 +124,7 @@ const value = {
   margin: "0 0 4px 0",
 }
 
-const email = {
+const emailStyle = {
   color: "#666666",
   fontSize: "16px",
   margin: "0",
@@ -165,5 +175,17 @@ const footer = {
 const footerText = {
   color: "#999999",
   fontSize: "14px",
+  margin: "0",
+}
+
+const footerHr = {
+  borderColor: "#e5e7eb",
+  margin: "0 0 24px 0",
+}
+
+const footerSubtext = {
+  color: "#9ca3af",
+  fontSize: "12px",
+  textAlign: "center" as const,
   margin: "0",
 }

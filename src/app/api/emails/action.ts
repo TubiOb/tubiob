@@ -19,7 +19,7 @@ export async function sendEmail<T>(to: string[], subject: string, template:Templ
 
 export async function sendContactEmail(formData: { name: string, email: string, message: string }): Promise<{ success: boolean; message: string }> {
     try {
-        const { ContactEmailTemplate } = await import('./../../../emails/ContactEmail')
+        const { ContactEmailTemplate } = await import('../../../emails/ContactEmail')
 
         const result = await sendEmail(
             ['tubiobaloluwa@gmail.com'],

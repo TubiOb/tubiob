@@ -9,7 +9,7 @@ type Template<T> = (props: T) => React.ReactElement
 
 export async function sendEmail<T>(to: string[], subject: string, template:Template<T>, props: T): Promise<CreateEmailResponse> {
     return await resend.emails.send({
-        from: 'TubiOb <tubiob.netlify.app>',
+        from: 'TubiOb <onboarding@resend.dev>',
         to,
         subject,
         react: template(props) as ReactElement,
@@ -19,7 +19,7 @@ export async function sendEmail<T>(to: string[], subject: string, template:Templ
 
 export async function sendContactEmail(formData: { name: string, email: string, message: string }): Promise<{ success: boolean; message: string }> {
     try {
-        const { ContactEmailTemplate } = await import('../emails/ContactEmail')
+        const { ContactEmailTemplate } = await import('./../emails/ContactEmail')
 
         const result = await sendEmail(
             ['tubiobaloluwa@gmail.com'],
