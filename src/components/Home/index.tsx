@@ -165,7 +165,7 @@ export const Home: React.FC = () => {
               A <span className="text-[var(--text-color-green)]">Frontend Developer</span>,
             </h2>
             <TextReveal
-              className="text-foreground max-w-lg mx-auto md:mx-0 font-light"
+              className="text-foreground text-justify max-w-lg font-light"
               from={{ x: 50, opacity: 0 }}
               to={{ x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }}
               exitTo={{ x: -30, opacity: 0, duration: 0.5, ease: "power2.in" }}
