@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
               About
             </Link>
             <Link href="/skills" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/skills') ? 'text-muted' : ''} `}>
-              Skills & Portfolio
+              Portfolio
             </Link>
             <Link href="/contact" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/contact') ? 'text-muted' : ''} `}>
               Contact

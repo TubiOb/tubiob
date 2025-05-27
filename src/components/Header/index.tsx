@@ -38,7 +38,7 @@
 //              <User className='text-[0.5rem] md:text-[1.125rem] flex lg:hidden' /> About
 //             </motion.a>
 //             <motion.a href="Skills" className="nav-link flex flex-col items-center gap-y-[0.25rem text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93]" whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }}>
-//              <Cpu className='text-[0.5rem] md:text-[1.125rem] flex lg:hidden' /> Skills & Portfolio
+//              <Cpu className='text-[0.5rem] md:text-[1.125rem] flex lg:hidden' /> Portfolio
 //             </motion.a>
 //             <motion.a href="Contact" className="nav-link flex flex-col items-center gap-y-[0.25rem text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93]" whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }}>
 //              <BotMessageSquare className='text-[0.5rem] md:text-[1.125rem] flex lg:hidden' /> Contact
@@ -92,7 +92,7 @@
 //             whileHover={{ scale: 1.1 }}
 //             whileTap={{ scale: 0.95 }}
 //           >
-//             Skills & Portfolio
+//             Portfolio
 //           </motion.a>
 //           <motion.a
 //             href="#Contact"
@@ -218,7 +218,7 @@
 //               whileHover={{ scale: 0.99 }}
 //               whileTap={{ scale: 0.95 }}
 //             >
-//               <Cpu className='text-[1.125rem] flex lg:hidden' /> Skills & Portfolio
+//               <Cpu className='text-[1.125rem] flex lg:hidden' /> Portfolio
 //             </motion.a>
 //             <motion.a 
 //               href="#contact" 
@@ -333,7 +333,7 @@
 //                 <User className='text-[1.125rem] flex lg:hidden' /> About
 //               </motion.a>
 //               <motion.a href="#skills" className="nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93] hover:text-black dark:hover:text-white"whileHover={{ scale: 0.99 }}whileTap={{ scale: 0.95 }}>
-//                 <Cpu className='text-[1.125rem] flex lg:hidden' /> Skills & Portfolio
+//                 <Cpu className='text-[1.125rem] flex lg:hidden' /> Portfolio
 //               </motion.a>
 //               <motion.a href="#contact" className="nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93] hover:text-black dark:hover:text-white"whileHover={{ scale: 0.99 }}whileTap={{ scale: 0.95 }}>
 //                 <BotMessageSquare className='text-[1.125rem] flex lg:hidden' /> Contact
@@ -437,7 +437,7 @@
 //                   <User className='text-[1.125rem] flex lg:hidden' /> About
 //                 </motion.a>
 //                 <motion.a href="#skills" className="nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93] hover:text-black dark:hover:text-white"whileHover={{ scale: 0.99 }}whileTap={{ scale: 0.95 }}onClick={() => setIsMenuOpen(false)}>
-//                   <Cpu className='text-[1.125rem] flex lg:hidden' /> Skills & Portfolio
+//                   <Cpu className='text-[1.125rem] flex lg:hidden' /> Portfolio
 //                 </motion.a>
 //                 <motion.a href="#contact" className="nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] lg:text-[0.941rem] text-[#8A8F93] hover:text-black dark:hover:text-white"whileHover={{ scale: 0.99 }}whileTap={{ scale: 0.95 }}onClick={() => setIsMenuOpen(false)}>
 //                   <BotMessageSquare className='text-[1.125rem] flex lg:hidden' /> Contact
@@ -557,7 +557,7 @@
 //             whileHover={{ scale: 0.97 }}
 //             whileTap={{ scale: 0.95 }}
 //           >
-//             Skills & Portfolio
+//             Portfolio
 //           </motion.a>
 //           <motion.a
 //             href="#contact"
@@ -778,7 +778,7 @@ export const Header: React.FC = () => {
               About
             </motion.a>
             <motion.a href="/skills" className={`nav-link text-[0.941rem] ${isActive("/skills") ? "text-muted" : ""}`} whileHover={{ scale: 0.97 }} whileTap={{ scale: 0.95 }}>
-              Skills & Portfolio
+              Portfolio
             </motion.a>
             <motion.a href="/contact" className={`nav-link text-[0.941rem] ${isActive("/contact") ? "text-muted" : ""}`} whileHover={{ scale: 0.97 }} whileTap={{ scale: 0.95 }}>
               Contact
@@ -829,7 +829,7 @@ export const Header: React.FC = () => {
                 <User className="text-[1.125rem]" /> About
               </motion.a>
               <motion.a href="/skills" className={`nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] ${isActive("/skills") ? "text-muted" : ""}`} whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }} onClick={closeMenu}>
-                <Cpu className="text-[1.125rem]" /> Skills & Portfolio
+                <Cpu className="text-[1.125rem]" /> Portfolio
               </motion.a>
               <motion.a href="/contact" className={`nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] ${isActive("/contact") ? "text-muted" : ""}`} whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }} onClick={closeMenu}>
                 <BotMessageSquare className="text-[1.125rem]" /> Contact
