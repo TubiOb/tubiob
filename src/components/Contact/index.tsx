@@ -161,8 +161,8 @@ export const Contact: React.FC = () => {
   return (
     <section ref={sectionRef} id="Contact" className="py-16 px-4 sm:px-6 lg:px-8">
       <div ref={contactContentRef} className="max-w-6xl mx-auto">
-        <div ref={headingRef}>
-          <h2 className="text-3xl font-bold mb-2">Contact</h2>
+        <div>
+          <h2 className="text-2xl font-semibold mb-2">Contact</h2>
           <span className="text-secondary">Get in touch</span>
         </div>
         <div className="mt-8 grid gap-8 md:grid-cols-2">
