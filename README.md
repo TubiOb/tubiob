@@ -1,15 +1,19 @@
 # Hi, I'm Obaloluwa 👨‍💻
 
-## Frontend Developer | 🎨 UI Enthusiast | 🏆 Sports Fan
+## Frontend Developer | 🏆 Sports Fan
 
 Welcome to my digital space! I build user-friendly web experiences, focusing on accessibility and clean design. When I'm not wrestling with React hooks, you'll find me arguing about Ronaldo (GOAT) vs Messi, watching Steph Curry's basketball highlights, or hoping Sir Lewis Hamilton returns to winning F1 races.
 
 
 ## 🛠️ Tech Stack
 **🧩 Frontend:** ![React](https://img.shields.io/badge/react-grey?logoColor=white&label=npm&labelColor=gray&color=blue), ![Next.js](https://img.shields.io/badge/Next.js-black?logoColor=white&label=npm&labelColor=gray&color=black), ![JavaScript (ES6+)](https://img.shields.io/badge/JS-%23F5F501?logoColor=white&label=npm&labelColor=gray&color=%23F5F501), ![TypeScript](https://img.shields.io/badge/typescript-grey?logoColor=white&label=npm&labelColor=gray&color=blue)  
+
 **🎨 Styling:** ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white), ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white), ![Framer](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)  
+
 **🔥 Backend:** ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase), ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white), ![MySQL](https://img.shields.io/badge/mysql-008CC1.svg?style=for-the-badge&logo=mysql&logoColor=white), ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white), ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)  
+
 **✏️ Design:** ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white), ![Canva](https://img.shields.io/badge/Canva-%23039BE5.svg?style=for-the-badge&logo=Canva&logoColor=white)  
+
 **🔧 Tools:** ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white), ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white), ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)  
 
 
@@ -38,6 +42,6 @@ Welcome to my digital space! I build user-friendly web experiences, focusing on 
 
 ## 📊 **My GitHub Stats**
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs?username=tubiob&layout=compact&theme=graywhite)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs?username=tubiob&layout=compact&theme=graywhite) 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tubiob&show_icons=true&theme=graywhite)](https://github.com/tubiob/github-readme-stats)  
 ![Streak Stats](https://github-readme-streak-stats.herokuapp.com/?user=tubiob&theme=graywhite)  
