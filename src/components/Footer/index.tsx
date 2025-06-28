@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
 
     const ctx = gsap.context(() => {
       // Set initial state to prevent flicker
-      gsap.set(footerRef.current, { opacity: 0, y: 30 })
+      gsap.set(footerRef.current, { opacity: 1, y: 30 })
 
       gsap.to(footerRef.current, {
         opacity: 1,
@@ -52,10 +52,10 @@ export const Footer: React.FC = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "bottom 10%",
+          start: "top 97%",
           toggleActions: "play none play reverse",
-          once: false,
-          invalidateOnRefresh: true,
+          once: true,
+          invalidateOnRefresh: false,
         },
       })
     }, footerRef)
