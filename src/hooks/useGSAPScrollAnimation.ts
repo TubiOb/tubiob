@@ -110,7 +110,7 @@ type ScrollAnimationOptions = {
   end?: string
   scrub?: boolean | number
   markers?: boolean
-  animation?: any
+  animation?: gsap.core.Timeline
   toggleActions?: string
   pin?: boolean
   anticipatePin?: boolean
@@ -134,6 +134,8 @@ export const useGSAPScrollAnimation = (
 useEffect(() => {
   // Make sure GSAP and ScrollTrigger are available
   if (!element.current) return
+
+  let currentAnimation: gsap.core.Timeline | null = null;
 
   const initAnimation = async () => {
     const gsapModule = await import('gsap');
@@ -186,13 +188,15 @@ useEffect(() => {
       },
       animation: tl,
     })
+
+    currentAnimation = tl;
+    animation.current = tl;
   }
   
   initAnimation();
 
   // Cleanup function
   return () => {
-    const currentAnimation = animation.current
     const currentScrollTrigger = scrollTrigger.current
 
     if (currentAnimation) {

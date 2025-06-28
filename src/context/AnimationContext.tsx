@@ -260,7 +260,7 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useRef, useEffect, useState } from "react"
+import { createContext, useContext, useRef, useEffect, useState, useCallback } from "react"
 
 type AnimationContextType = {
   mainTimeline: gsap.core.Timeline | null
@@ -353,7 +353,7 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }
 
   // Function to rebuild the timeline with all registered animations
-  const rebuildTimeline = () => {
+  const rebuildTimeline = useCallback(() => {
     if (!mainTimeline.current || !gsap) return
 
     // Clear the current timeline
@@ -373,14 +373,14 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     //     }
     //   })
     mainTimeline.current.play(0)
-  }
+  }, [gsap]);
 
   // Play the timeline when the component mounts
   useEffect(() => {
     if (mainTimeline.current && animations.current.length > 0) {
       rebuildTimeline()
     }
-  }, [])
+  }, [rebuildTimeline])
 
   return (
     <AnimationContext.Provider value={{ mainTimeline: mainTimeline.current, isReady, registerAnimation }}>

@@ -134,6 +134,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
   const textRef = useRef<HTMLDivElement>(null)
   const splitRef = useRef<SplitText | null>(null)
   const [isClient, setIsClient] = useState(false)
+  const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
 
   useEffect(() => {
     setIsClient(true)
@@ -144,7 +145,6 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 
     if (!isClient || !currentTextRef) return
 
-    let animation: any;
     const initAnimation = async () => {
       try {
         const gsapModule = await import("gsap")
@@ -162,7 +162,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
     
         // Create animation
         if (trigger) {
-          animation = gsap.fromTo(chars, from, {
+          animationRef.current = gsap.fromTo(chars, from, {
             ...to,
             duration,
             stagger,
@@ -174,7 +174,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
             },
           })
         } else {
-          animation = gsap.fromTo(chars, from, {
+            animationRef.current = gsap.fromTo(chars, from, {
             ...to,
             duration,
             delay,
@@ -192,7 +192,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 
     // Cleanup function
     return () => {
-      if (animation) animation.kill()
+      if (animationRef.current) animationRef.current.kill()
       if (splitRef.current) splitRef.current.revert()
       if (trigger && typeof window !== 'undefined') {
         import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
