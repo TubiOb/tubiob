@@ -106,10 +106,10 @@ export const FeaturedProject: React.FC = () => {
 
     return () => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
       })
     }
-  }, [isLoading, featuredProjects])
+  }, [isClient, isLoading, featuredProjects])
 
 
   if (isLoading) {

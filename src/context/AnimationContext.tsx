@@ -282,14 +282,14 @@ export const useAnimation = () => useContext(AnimationContext)
 
 type AnimationItem = {
   element: React.RefObject<HTMLElement>
-  animation: (tl: any) => void
+  animation: (tl: gsap.core.Timeline) => void
   priority: number
 }
 
 export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isReady, setIsReady] = useState(false)
-  const [gsap, setGsap] = useState<any>(null)
-  const mainTimeline = useRef<any | null>(null)
+  const [gsap, setGsap] = useState<typeof import('gsap')['default'] | null>(null)
+  const mainTimeline = useRef<gsap.core.Timeline | null>(null)
   const animations = useRef<AnimationItem[]>([])
   const isInitialized = useRef(false)
 
@@ -322,8 +322,9 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         mainTimeline.current.kill()
       }
       if (typeof window !== 'undefined') {
-        const { ScrollTrigger } = require('gsap/ScrollTrigger')
-        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+        import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+          ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+        })
       }
     }
   }, [])

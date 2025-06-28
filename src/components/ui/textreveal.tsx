@@ -113,9 +113,9 @@ type TextRevealProps = {
   stagger?: number
   duration?: number
   delay?: number
-  from?: any
-  to?: any
-  exitTo?: any
+  from?: gsap.TweenVars
+  to?: gsap.TweenVars
+  exitTo?: gsap.TweenVars
   trigger?: boolean
   toggleActions?: string
 }
@@ -133,7 +133,6 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 }) => {
   const textRef = useRef<HTMLDivElement>(null)
   const splitRef = useRef<SplitText | null>(null)
-  const animationRef = useRef<any | null>(null)
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -145,6 +144,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 
     if (!isClient || !currentTextRef) return
 
+    let animation: any;
     const initAnimation = async () => {
       try {
         const gsapModule = await import("gsap")
@@ -162,7 +162,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
     
         // Create animation
         if (trigger) {
-          animationRef.current = gsap.fromTo(chars, from, {
+          animation = gsap.fromTo(chars, from, {
             ...to,
             duration,
             stagger,
@@ -174,7 +174,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
             },
           })
         } else {
-          animationRef.current = gsap.fromTo(chars, from, {
+          animation = gsap.fromTo(chars, from, {
             ...to,
             duration,
             delay,
@@ -192,7 +192,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 
     // Cleanup function
     return () => {
-      if (animationRef.current) animationRef.current.kill()
+      if (animation) animation.kill()
       if (splitRef.current) splitRef.current.revert()
       if (trigger && typeof window !== 'undefined') {
         import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {

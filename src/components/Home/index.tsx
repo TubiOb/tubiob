@@ -12,7 +12,7 @@ import { Typewriter } from "../ui/typewriter"
 import { useAnimation } from "@/context/AnimationContext"
 
 export const Home: React.FC = () => {
-  const [gsap, setGsap] = useState<any>(null)
+  const [gsapInstance, setGsapInstance] = useState<typeof gsap | null>(null)
   const profileRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const featuredProjectRef = useRef<HTMLDivElement>(null);
@@ -28,7 +28,7 @@ export const Home: React.FC = () => {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger")
 
       gsapModule.default.registerPlugin(ScrollTrigger)
-      setGsap(gsapModule.default)
+      setGsapInstance(gsapModule.default)
     }
 
     initGSAP()
@@ -36,11 +36,11 @@ export const Home: React.FC = () => {
 
 
   useEffect(() => {
-    if (homeContentRef.current && profileRef.current && introRef.current && gsap) {
+    if (homeContentRef.current && profileRef.current && introRef.current && gsapInstance) {
       registerAnimation(
         homeContentRef as React.RefObject<HTMLElement>,
         (tl) => {
-          gsap.set([sectionRef.current, profileRef.current, introRef.current], {
+          gsapInstance.set([sectionRef.current, profileRef.current, introRef.current], {
             opacity: 0,
             y: 0
           })
@@ -68,7 +68,7 @@ export const Home: React.FC = () => {
         5, // Medium-high priority
       )
     }
-  }, [registerAnimation, gsap])
+  }, [registerAnimation, gsapInstance])
 
 
 
@@ -82,9 +82,9 @@ export const Home: React.FC = () => {
   })
 
   useEffect(() => {
-    if (!sectionRef.current || !gsap) return
+    if (!sectionRef.current || !gsapInstance) return
 
-    gsap.to(sectionRef.current, {
+    gsapInstance.to(sectionRef.current, {
       backgroundPositionY: "10%",
       ease: "none",
       scrollTrigger: {
@@ -97,10 +97,11 @@ export const Home: React.FC = () => {
     })
 
     return () => {
-      const { ScrollTrigger } = require("gsap/ScrollTrigger")
-      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      })
     }
-  }, [gsap])
+  }, [gsapInstance])
 
   const switchingTexts = ["Obaloluwa Tubi", "a Frontend Developer"]
 

@@ -26,8 +26,9 @@ export const GSAPProvider = ({ children }: { children: React.ReactNode }) => {
     // Cleanup function
     return () => {
       if (typeof window !== "undefined") {
-        const { ScrollTrigger } = require("gsap/ScrollTrigger")
-        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+        import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+          ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+        })
       }
     }
   }, [])

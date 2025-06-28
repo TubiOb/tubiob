@@ -126,7 +126,7 @@ export const SkillsAndProjects: React.FC = () => {
     // Cleanup function
     return () => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
       })
     }
   }, [isClient])

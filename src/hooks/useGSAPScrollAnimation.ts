@@ -102,6 +102,7 @@
 
 import type React from "react"
 import { useEffect, useRef } from "react"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type ScrollAnimationOptions = {
   trigger?: string | Element
@@ -117,9 +118,9 @@ type ScrollAnimationOptions = {
   onLeave?: () => void
   onEnterBack?: () => void
   onLeaveBack?: () => void
-  from?: any
-  to?: any
-  exitTo?: any
+  from?: gsap.TweenVars
+  to?: gsap.TweenVars
+  exitTo?: gsap.TweenVars
 }
 
 export const useGSAPScrollAnimation = (
@@ -127,8 +128,8 @@ export const useGSAPScrollAnimation = (
   options: ScrollAnimationOptions = {},
   dependencies: unknown[] = [],
 ) => {
-  const animation = useRef<any | null>(null)
-  const scrollTrigger = useRef<any | null>(null)
+  const animation = useRef<gsap.core.Timeline | null>(null)
+  const scrollTrigger = useRef<ScrollTrigger | null>(null)
 
 useEffect(() => {
   // Make sure GSAP and ScrollTrigger are available
@@ -136,11 +137,11 @@ useEffect(() => {
 
   const initAnimation = async () => {
     const gsapModule = await import('gsap');
-    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+    const { ScrollTrigger: ST } = await import('gsap/ScrollTrigger');
 
     const gsap = gsapModule.default
     // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ST)
   
     // Default values
     const from = options.from || { opacity: 0, y: 50 }
@@ -154,7 +155,7 @@ useEffect(() => {
     tl.fromTo(element.current, from, to)
   
     // Create ScrollTrigger
-    scrollTrigger.current = ScrollTrigger.create({
+    scrollTrigger.current = ST.create({
       trigger: options.trigger || element.current,
       start: options.start || "top 80%",
       end: options.end || "bottom 20%",
@@ -191,11 +192,14 @@ useEffect(() => {
 
   // Cleanup function
   return () => {
-    if (animation.current) {
-      animation.current.kill()
+    const currentAnimation = animation.current
+    const currentScrollTrigger = scrollTrigger.current
+
+    if (currentAnimation) {
+      currentAnimation.kill()
     }
-    if (scrollTrigger.current) {
-      scrollTrigger.current.kill()
+    if (currentScrollTrigger) {
+      currentScrollTrigger.kill()
     }
   }
 }, [element, options, ...dependencies]) // eslint-disable-line react-hooks/exhaustive-deps

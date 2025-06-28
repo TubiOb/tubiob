@@ -127,7 +127,7 @@ export const InteractiveSkills: React.FC = () => {
 
     return () => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
       })
     }
   }, [isClient])

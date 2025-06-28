@@ -188,9 +188,9 @@ export const About: React.FC = () => {
             </p> */}
             <p className="mb-4">
               I write code, break things, fix them, and somehow make it all work. I build user-friendly web experiences, 
-              focusing on{" "} accessibility and{" "} clean design. When I'm not wrestling with React hooks, 
-              you'll find me arguing about <span className="text-[var(--text-color-light)] font-medium">Ronaldo (GOAT)</span> vs
-              Messi, watching <span className="text-[var(--text-color-light)] font-medium">Steph Curry's</span> basketball highlights,
+              focusing on{" "} accessibility and{" "} clean design. When I&#39;m not wrestling with React hooks, 
+              you&#39;ll find me arguing about <span className="text-[var(--text-color-light)] font-medium">Ronaldo (GOAT)</span> vs
+              Messi, watching <span className="text-[var(--text-color-light)] font-medium">Steph Curry&#39;s</span> basketball highlights,
               or hoping <span className="text-[var(--text-color-light)] font-medium">Sir Lewis Hamilton</span> returns to winning F1
               races.
             </p>
@@ -199,7 +199,7 @@ export const About: React.FC = () => {
                I build web apps with{" "}
               <span className="font-mono bg-accent px-2 py-1 rounded">Next.js</span>,{" "}
               <span className="font-mono bg-accent px-2 py-1 rounded">React</span>, and{" "}
-              <span className="font-mono bg-accent px-2 py-1 rounded">TypeScript</span>, making sure they don't just run
+              <span className="font-mono bg-accent px-2 py-1 rounded">TypeScript</span>, making sure they don&#39;t just run
               but run well. Sometimes, I add animations, because why not?
             </p>
           </div>
