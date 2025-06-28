@@ -13,17 +13,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "hive-hub",
-    title: "Hivehub",
-    description:
-      "Hivehub is an open publishing platform inspired by Medium - a place where meaningful ideas find their audience. We connect thoughtful writers with curious readers through beautiful storytelling tools and smart discovery.",
-    images: ['/img/Hivehub1.png', '/img/Hivehub2.png', '/img/Hivehub3.png'],
-    demoUrl: "https://hive-hub.netlify.app/",
-    codeUrl: "https://github.com/Ade1fe/HiveHub",
-    technologies: ["Typescript", "Chakra UI", "Firebase", 'Tiptap Rich Editor', "Framer Motion", 'Vite'],
-    featured: true,
-  },
-  {
     id: "boiibonline",
     title: "Boiib Online",
     description:
@@ -32,7 +21,7 @@ export const projects: Project[] = [
     demoUrl: 'https://staging.boiibonline.ng/',
     codeUrl: "",
     technologies: ["Typescript", "Axios", "MUI", 'Tailwind CSS', 'Tanstack React Table', 'Papaparse', 'Lucide React', 'NPM', 'Yup', 'Flutterwave API', 'Quill Text Editor'],
-    featured: true,
+    featured: false,
   },
   {
     id: "playcv",
@@ -43,7 +32,29 @@ export const projects: Project[] = [
     demoUrl: "https://dev.playcv.ng/",
     codeUrl: "",
     technologies: ["Typescript", 'Axios', "MUI", 'Paystack API', 'Tiptap Rich Editor', 'Cloudflare Integration', "API Integration", "NX", 'Yarn', 'Zod'],
-    featured: true,
+    featured: false,
+  },
+  {
+    id: "hive-hub",
+    title: "Hivehub",
+    description:
+      "Hivehub is an open publishing platform inspired by Medium - a place where meaningful ideas find their audience. We connect thoughtful writers with curious readers through beautiful storytelling tools and smart discovery.",
+    images: ['/img/Hivehub1.png', '/img/Hivehub2.png', '/img/Hivehub3.png'],
+    demoUrl: "https://hive-hub.netlify.app/",
+    codeUrl: "https://github.com/Ade1fe/HiveHub",
+    technologies: ["Typescript", "Chakra UI", "Firebase", 'Tiptap Rich Editor', "Framer Motion", 'Vite'],
+    featured: false,
+  },
+  {
+    id: "memomaze",
+    title: "Memomaze",
+    description:
+      "A minimalist note-taking web app inspired by Google Keep. Create and organize notes with real-time syncing. Features intuitive search, labels, and a responsive design for seamless access across devices.",
+    images: ['/img/Memomaze.png', '/img/Memomaze1.png', '/img/Memomaze2.png', '/img/Memomaze3.png'],
+    demoUrl: 'https://memomaze.netlify.app//',
+    codeUrl: "https://github.com/TubiOb/memomaze",
+    technologies: ["React", "Yup", "Tailwind CSS", 'Sonner React Toast', 'Firebase', 'Github Actions', 'CI/CD'],
+    featured: false,
   },
   {
     id: "learnest",
@@ -65,17 +76,6 @@ export const projects: Project[] = [
     demoUrl: 'https://oba-cloudequip.netlify.app/',
     codeUrl: "https://github.com/TubiOb/cloudequipment",
     technologies: ["React", "Tailwind CSS"],
-    featured: false,
-  },
-  {
-    id: "memomaze",
-    title: "Memomaze",
-    description:
-      "A minimalist note-taking web app inspired by Google Keep. Create and organize notes with real-time syncing. Features intuitive search, labels, and a responsive design for seamless access across devices.",
-    images: ['/img/Memomaze.png', '/img/Memomaze1.png', '/img/Memomaze2.png', '/img/Memomaze3.png'],
-    demoUrl: 'https://memomaze.netlify.app//',
-    codeUrl: "https://github.com/TubiOb/memomaze",
-    technologies: ["React", "Yup", "Tailwind CSS", 'Sonner React Toast', 'Firebase', 'Github Actions', 'CI/CD'],
     featured: false,
   },
   {

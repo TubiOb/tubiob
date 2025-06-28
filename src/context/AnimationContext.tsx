@@ -261,8 +261,6 @@
 
 import type React from "react"
 import { createContext, useContext, useRef, useEffect, useState } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 type AnimationContextType = {
   mainTimeline: gsap.core.Timeline | null
@@ -284,46 +282,59 @@ export const useAnimation = () => useContext(AnimationContext)
 
 type AnimationItem = {
   element: React.RefObject<HTMLElement>
-  animation: (tl: gsap.core.Timeline) => void
+  animation: (tl: any) => void
   priority: number
 }
 
 export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isReady, setIsReady] = useState(false)
-  const mainTimeline = useRef<gsap.core.Timeline | null>(null)
+  const [gsap, setGsap] = useState<any>(null)
+  const mainTimeline = useRef<any | null>(null)
   const animations = useRef<AnimationItem[]>([])
   const isInitialized = useRef(false)
 
   // Initialize GSAP and create main timeline
   useEffect(() => {
-    if (typeof window === "undefined" || isInitialized.current) return
+    if (isInitialized.current) return
 
-    gsap.registerPlugin(ScrollTrigger)
-    mainTimeline.current = gsap.timeline({
-      paused: false,
-      onComplete: () => {
-        setIsReady(true)
-      },
-    })
+    const initGSAP = async () => {
+      const gsapModule = await import('gsap')
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+      
+      gsapModule.default.registerPlugin(ScrollTrigger)
+      setGsap(gsapModule.default);
 
-    isInitialized.current = true
+      mainTimeline.current = gsapModule.default.timeline({
+        paused: false,
+        onComplete: () => {
+          setIsReady(true)
+        },
+      })
+  
+      isInitialized.current = true
+    }
+
+    initGSAP();
 
     // Clean up on unmount
     return () => {
       if (mainTimeline.current) {
         mainTimeline.current.kill()
       }
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      if (typeof window !== 'undefined') {
+        const { ScrollTrigger } = require('gsap/ScrollTrigger')
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      }
     }
   }, [])
 
   // Function to register animations with the main timeline
   const registerAnimation = <T extends HTMLElement>(
     element: React.RefObject<T>,
-    animation: (tl: gsap.core.Timeline) => void,
+    animation: (tl: any) => void,
     priority = 0,
   ) => {
-    if (!element.current) return
+    if (!element.current || !gsap) return
 
     animations.current.push({
       element: element as React.RefObject<HTMLElement>,
@@ -342,7 +353,7 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   // Function to rebuild the timeline with all registered animations
   const rebuildTimeline = () => {
-    if (!mainTimeline.current) return
+    if (!mainTimeline.current || !gsap) return
 
     // Clear the current timeline
     mainTimeline.current.clear()
@@ -353,13 +364,14 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     })
 
     // Play the timeline
-    mainTimeline.current
-      .play(0)
-      .then(() => {
-        if (mainTimeline.current?.progress() === 1) {
-          setIsReady(true)
-        }
-      })
+    // mainTimeline.current
+    //   .play(0)
+    //   .then(() => {
+    //     if (mainTimeline.current?.progress() === 1) {
+    //       setIsReady(true)
+    //     }
+    //   })
+    mainTimeline.current.play(0)
   }
 
   // Play the timeline when the component mounts

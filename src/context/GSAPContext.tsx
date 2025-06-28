@@ -2,26 +2,33 @@
 
 import type React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 
 // Create context
-const GSAPContext = createContext({})
+const GSAPContext = createContext({
+  contextReady: false,
+})
 
 export const GSAPProvider = ({ children }: { children: React.ReactNode }) => {
   const [contextReady, setContextReady] = useState(false)
 
   useEffect(() => {
-    // Register GSAP plugins
-    if (typeof window !== "undefined") {
+    const initGSAP = async () => {
+      const { default: gsap } = await import("gsap")
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      const { ScrollToPlugin } = await import("gsap/ScrollToPlugin")
+      
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
       setContextReady(true)
     }
 
+    initGSAP();
+    
     // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      if (typeof window !== "undefined") {
+        const { ScrollTrigger } = require("gsap/ScrollTrigger")
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      }
     }
   }, [])
 

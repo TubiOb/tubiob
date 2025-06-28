@@ -60,7 +60,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt, autoP
   // If there's only one image, just show it without controls
   if (images.length === 1) {
     return (
-      <div className="relative h-48 w-full overflow-hidden">
+      <div className="relative h-64 w-full overflow-hidden">
         <Image src={images[0] || "/placeholder.svg?height=200&width=400"} alt={alt} className="object-cover" fill sizes={'fill'} priority={false} />
       </div>
     )
@@ -68,11 +68,11 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt, autoP
 
   return (
     <div
-      className="relative h-52 w-full overflow-hidden"
+      className="relative h-64 w-full overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <AnimatePresence initial={false} custom={direction} mode="wait">
+      <AnimatePresence initial={false} custom={direction} mode="sync">
         <motion.div
           key={currentIndex}
           custom={direction}
@@ -81,7 +81,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt, autoP
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
+            x: { type: "tween", stiffness: 100, damping: 30 },
             opacity: { duration: 0.2 },
           }}
           className="absolute inset-0"

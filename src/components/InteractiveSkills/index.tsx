@@ -2,11 +2,9 @@
 
 import type React from "react"
 // import { motion } from "framer-motion"
-import { useRef, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useEffect, useState } from "react"
 import { TextReveal } from "@/components/ui/textreveal"
-import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, /* Component, */ Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, /* Lock, TestTube, LineChart, */ Rocket, Workflow, } from "lucide-react"
+import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, Rocket, Workflow, } from "lucide-react"
 
 type Skill = {
   name: string
@@ -78,48 +76,61 @@ const skills: SkillCategory[] = [
 ]
 
 export const InteractiveSkills: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null)
   const skillsRef = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
-    if (typeof window === "undefined") return
+    setIsClient(true);
+  }, [])
 
-    gsap.registerPlugin(ScrollTrigger)
+  useEffect(() => {
+    if (!isClient) return
 
-    const allSkills = skills.flatMap(category => category.skills);
-    skillsRef.current = skillsRef.current.slice(0, allSkills.length)
+    const initAnimation = async () => {
+      const gsapModule = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      const gsap = gsapModule.default;
 
-    if (sectionRef.current) {
-
-      allSkills.forEach((skill, index) => {
-        const skillElement = skillsRef.current[index];
-        if (!skillElement) return
-
-        gsap.fromTo(skillElement,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: 0.2 + index * 0.05,
-            ease: "power2.out",
-            // stagger: 0.15,
-            scrollTrigger: {
-              trigger: skillElement,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-              once: false,
-              invalidateOnRefresh: true,
+      gsap.registerPlugin(ScrollTrigger)
+  
+      const allSkills = skills.flatMap(category => category.skills);
+      skillsRef.current = skillsRef.current.slice(0, allSkills.length)
+  
+      if (sectionRef.current) {
+        allSkills.forEach((skill, index) => {
+          const skillElement = skillsRef.current[index];
+          if (!skillElement) return
+  
+          gsap.fromTo(skillElement,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: 0.2 + index * 0.05,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: skillElement,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+                once: false,
+                invalidateOnRefresh: true,
+              },
             },
-          },
-        )
-      })
+          )
+        })
+      }
     }
+
+    initAnimation();
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      })
     }
-  }, [])
+  }, [isClient])
 
 
   return (
@@ -147,7 +158,7 @@ export const InteractiveSkills: React.FC = () => {
     //     </div>
     //   ))}
     // </div>
-    <section ref={sectionRef} className="py-16">
+    <section ref={sectionRef} className="py-16" suppressHydrationWarning>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <TextReveal className="text-xl font-semibold text-center mb-12">Technical Skills</TextReveal>
 

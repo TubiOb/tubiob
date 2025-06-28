@@ -50,9 +50,7 @@
 "use client"
 
 import type React from "react"
-import { useRef, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useEffect, useState } from "react"
 
 type LearningItem = {
   title: string
@@ -79,49 +77,37 @@ const learningItems: LearningItem[] = [
 ]
 
 export const LearningNow: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const itemsRef = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
-    if (typeof window === "undefined") return
+    setIsClient(true);
+  }, [])
 
-    gsap.registerPlugin(ScrollTrigger)
+  useEffect(() => {
+    if (!isClient) return
 
-    // Reset the itemsRef array to match the current number of items
-    itemsRef.current = itemsRef.current.slice(0, learningItems.length)
-
-    if (sectionRef.current && titleRef.current) {
-      // Animate the section title
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
-
-      // Animate each learning item
-      itemsRef.current.forEach((item, index) => {
-        if (!item) return
-
-        // Animate the item container
+    const initAnimation = async () => {
+      const gsapModule = await import("gsap")
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      const gsap = gsapModule.default
+      
+      gsap.registerPlugin(ScrollTrigger)
+  
+      // Reset the itemsRef array to match the current number of items
+      itemsRef.current = itemsRef.current.slice(0, learningItems.length)
+  
+      if (sectionRef.current && titleRef.current) {
+        // Animate the section title
         gsap.fromTo(
-          item,
+          titleRef.current,
           { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            delay: 0.2 + index * 0.15,
-            ease: "power2.out",
+            duration: 0.8,
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 80%",
@@ -129,17 +115,43 @@ export const LearningNow: React.FC = () => {
             },
           },
         )
-      })
+  
+        // Animate each learning item
+        itemsRef.current.forEach((item, index) => {
+          if (!item) return
+  
+          // Animate the item container
+          gsap.fromTo(
+            item,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: 0.2 + index * 0.15,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          )
+        })
+      }
     }
 
+
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      })
     }
   }, [])
 
   
   return (
-    <div ref={sectionRef} className="mt-16">
+    <div ref={sectionRef} className="mt-16" suppressHydrationWarning>
       <h3 ref={titleRef} className="text-xl font-bold mb-8">
         Currently Learning
       </h3>

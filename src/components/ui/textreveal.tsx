@@ -105,10 +105,7 @@
 "use client"
 
 import type React from "react"
-import { useRef, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { SplitText } from "gsap/SplitText"
+import { useRef, useEffect, useState } from "react"
 
 type TextRevealProps = {
   children: React.ReactNode
@@ -116,9 +113,9 @@ type TextRevealProps = {
   stagger?: number
   duration?: number
   delay?: number
-  from?: gsap.TweenVars
-  to?: gsap.TweenVars
-  exitTo?: gsap.TweenVars
+  from?: any
+  to?: any
+  exitTo?: any
   trigger?: boolean
   toggleActions?: string
 }
@@ -136,59 +133,81 @@ export const TextReveal: React.FC<TextRevealProps> = ({
 }) => {
   const textRef = useRef<HTMLDivElement>(null)
   const splitRef = useRef<SplitText | null>(null)
+  const animationRef = useRef<any | null>(null)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const currentTextRef = textRef.current;
 
-    if (typeof window === "undefined" || !currentTextRef) return
+    if (!isClient || !currentTextRef) return
 
-    // Register plugins
-    gsap.registerPlugin(ScrollTrigger, SplitText)
+    const initAnimation = async () => {
+      try {
+        const gsapModule = await import("gsap")
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+        const { SplitText } = await import("gsap/SplitText")
 
-    // Create SplitText instance
-    splitRef.current = new SplitText(currentTextRef, { type: "words,chars" })
-    const chars = splitRef.current.chars
-
-    // Create animation
-    let animation
-    if (trigger) {
-      animation = gsap.fromTo(chars, from, {
-        ...to,
-        duration,
-        stagger,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: currentTextRef,
-          start: "top 80%",
-          toggleActions,
-        },
-      })
-    } else {
-      animation = gsap.fromTo(chars, from, {
-        ...to,
-        duration,
-        delay,
-        stagger,
-        ease: "power2.out",
-      })
+        const gsap = gsapModule.default
+        
+        // Register plugins
+        gsap.registerPlugin(ScrollTrigger, SplitText)
+    
+        // Create SplitText instance
+        splitRef.current = new SplitText(currentTextRef, { type: "words, chars" })
+        const chars = splitRef.current.chars
+    
+        // Create animation
+        if (trigger) {
+          animationRef.current = gsap.fromTo(chars, from, {
+            ...to,
+            duration,
+            stagger,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: currentTextRef,
+              start: "top 80%",
+              toggleActions,
+            },
+          })
+        } else {
+          animationRef.current = gsap.fromTo(chars, from, {
+            ...to,
+            duration,
+            delay,
+            stagger,
+            ease: "power2.out",
+          })
+        }
+      }
+      catch (err) {
+        console.error('Failed to initialize TextReveal animation: ', err)
+      }
     }
+
+    initAnimation();
 
     // Cleanup function
     return () => {
-      if (animation) animation.kill()
+      if (animationRef.current) animationRef.current.kill()
       if (splitRef.current) splitRef.current.revert()
-      if (trigger) {
-        ScrollTrigger.getAll().forEach((st) => {
-          if (st.vars.trigger === currentTextRef) {
-            st.kill()
-          }
+      if (trigger && typeof window !== 'undefined') {
+        import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+          ScrollTrigger.getAll().forEach((st) => {
+            if (st.vars.trigger === currentTextRef) {
+              st.kill()
+            }
+          })
         })
       }
     }
-  }, [from, to, stagger, duration, delay, trigger, toggleActions])
+  }, [from, to, stagger, duration, delay, trigger, toggleActions, isClient])
 
   return (
-    <div ref={textRef} className={className}>
+    <div ref={textRef} className={className} style={{ opacity: isClient ? 1 : 0 }} suppressHydrationWarning>
       {children}
     </div>
   )

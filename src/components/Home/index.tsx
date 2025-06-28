@@ -1,59 +1,45 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
 // import { motion } from "framer-motion"
-import { FeaturedProject } from "./../FeaturedProject"
+// import { FeaturedProject } from "./../FeaturedProject"
 // import { Testimonials } from "./../Testimonials"
 import Image from "next/image"
 import { TubiOb } from "../../../public/img"
 import { useGSAPScrollAnimation } from "@/hooks/useGSAPScrollAnimation";
 import { TextReveal } from "../ui/textreveal"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-// import { InteractiveSkills } from "../InteractiveSkills"
+import { Typewriter } from "../ui/typewriter"
 import { useAnimation } from "@/context/AnimationContext"
 
 export const Home: React.FC = () => {
+  const [gsap, setGsap] = useState<any>(null)
   const profileRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const featuredProjectRef = useRef<HTMLDivElement>(null);
-  // const interactiveSkillsRef = useRef<HTMLDivElement>(null);
   const homeContentRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   
   const { registerAnimation } = useAnimation();
 
+  // Initialize GSAP
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger)
+    const initGSAP = async () => {
+      const gsapModule = await import("gsap")
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+
+      gsapModule.default.registerPlugin(ScrollTrigger)
+      setGsap(gsapModule.default)
     }
-  }, []);
 
-  // useEffect(() => {
-  //   if (!profileRef.current || !introRef.current) return;
-
-  //   const tl = gsap.timeline({ defaults: { ease: 'power2.out' } })
-
-  //   tl.fromTo(profileRef.current, { opacity: 0, y: 60, }, { opacity: 1, y: 0, duration: 1 }).fromTo(
-  //     introRef.current,
-  //     { opacity: 0, y: 60, },
-  //     { opacity: 1, y: 0, duration: 1 },
-  //     '-=0.8'
-  //   )
-
-  //   return () => {
-  //     tl.kill();
-  //   }
-  // }, []);
-
+    initGSAP()
+  }, [])
 
 
   useEffect(() => {
-    if (homeContentRef.current && profileRef.current && introRef.current) {
+    if (homeContentRef.current && profileRef.current && introRef.current && gsap) {
       registerAnimation(
         homeContentRef as React.RefObject<HTMLElement>,
         (tl) => {
-
           gsap.set([sectionRef.current, profileRef.current, introRef.current], {
             opacity: 0,
             y: 0
@@ -82,7 +68,7 @@ export const Home: React.FC = () => {
         5, // Medium-high priority
       )
     }
-  }, [registerAnimation])
+  }, [registerAnimation, gsap])
 
 
 
@@ -95,17 +81,8 @@ export const Home: React.FC = () => {
     exitTo: { opacity: 0.8, y: -40, duration: 1, ease: "power.easeIn" },
   })
 
-  // useGSAPScrollAnimation(interactiveSkillsRef, {
-  //   start: 'top 80%',
-  //   end: "bottom 25%",
-  //   toggleActions: 'play reverse play reverse',
-  //   from: { opacity: 0, y: 50 },
-  //   to: { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-  //   exitTo: { opacity: 0, y: -50, duration: 1, ease: "power2.in" },
-  // })
-
   useEffect(() => {
-    if (!sectionRef.current) return
+    if (!sectionRef.current || !gsap) return
 
     gsap.to(sectionRef.current, {
       backgroundPositionY: "10%",
@@ -113,46 +90,55 @@ export const Home: React.FC = () => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 25%",
-        endTrigger: featuredProjectRef.current,
         end: "bottom 90%",
-        scrub: true,
-        toggleActions: "play reverse play reverse",
+        scrub: false,
+        toggleActions: "play reverse play pause",
       },
     })
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      const { ScrollTrigger } = require("gsap/ScrollTrigger")
+      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
     }
-  }, [])
+  }, [gsap])
+
+  const switchingTexts = ["Obaloluwa Tubi", "a Frontend Developer"]
 
   return (
-    <section ref={sectionRef} id="Home" className="py-16 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
-      <div ref={homeContentRef} className="max-w-6xl mx-auto" style={{ opacity: 1 }}>
-        <div className="grid md:grid-cols-2 gap-8 items-center my-2 mb-40 z-10">
-          <div
-            className="flex justify-center"
-            ref={profileRef}
-            // initial={{ opacity: 0, y: 50 }}
-            // animate={{ opacity: 1, y: 0 }}
-            // transition={{ duration: 0.5 }}
-          >
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
+    <section ref={sectionRef} id="Home" className="py-16 px-4 flex items-start justify-center sm:px-6 lg:px-8 overflow-x-hidden">
+      <div ref={homeContentRef} className="max-w-6xl mx-auto h-[30rem]" >
+        <div className="grid md:grid-cols-2 gap-8 items-center justify-center place-items-center my-auto z-10 h-full">
+          {/* <div
+            className="flex bg-green-600 h-auto rounded-3xl"
+            
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          > */}
+            <div ref={profileRef} className="relative w-64 h-64 md:w-80 md:h-80">
               <Image
                 src={TubiOb}
                 alt="Tubi Obaloluwa Shalom"
                 className="rounded-3xl border-4 border-secondary object-cover"
+                priority={false}
+                fill
+                sizes={'fill'}
               />
             </div>
-          </div>
+          {/* </div> */}
           <div
-            className="text-center md:text-left"
+            className="text-center md:text-left px-2"
             ref={introRef}
             // initial={{ opacity: 0, y: 50 }}
             // animate={{ opacity: 1, y: 0 }}
             // transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-xl md:text-2xl font-normal mb-2">Hi,</h3>
-            <TextReveal
+            <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[var(--text-color-light)]">Hi there, <span className="text-2xl">👋</span></h3>
+            <span className="text-3xl md:text-4xl font-normal mb-4">
+              {"I'm "}
+              <Typewriter texts={switchingTexts} speed={3000} delay={300} className='text-[var(--text-color-green)]' />
+            </span>
+            {/* <TextReveal
               className="text-3xl md:text-4xl font-normal mb-2"
               from={{ y: 50, opacity: 0 }}
               to={{ y: 0, opacity: 1, duration: 1, ease: "power2.out" }}
@@ -163,7 +149,7 @@ export const Home: React.FC = () => {
             </TextReveal>
             <h2 className="text-2xl md:text-3xl font-normal mb-1">
               A <span className="text-[var(--text-color-green)]">Frontend Developer</span>,
-            </h2>
+            </h2> */}
             <TextReveal
               className="text-foreground text-justify max-w-lg font-light"
               from={{ x: 50, opacity: 0 }}
@@ -171,14 +157,12 @@ export const Home: React.FC = () => {
               exitTo={{ x: -30, opacity: 0, duration: 0.5, ease: "power2.in" }}
               toggleActions="play pause play pause"
             >
-              who is passionate about and creates fascinating web designs. I have keen interest in bringing services
-              closer to users, as well as providing solutions by building user friendly and accessible websites.
+              I build functional and efficient web applications using React, TypeScript, and Next.js, focusing on clean
+              code and practical solutions.
+              {/* who is passionate about and creates fascinating web designs. I have keen interest in bringing services
+              closer to users, as well as providing solutions by building user friendly and accessible websites. */}
             </TextReveal>
           </div>
-        </div>
-
-        <div ref={featuredProjectRef}>
-          <FeaturedProject />
         </div>
         {/* <div ref={interactiveSkillsRef}>
           <InteractiveSkills />

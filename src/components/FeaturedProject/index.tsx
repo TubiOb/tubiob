@@ -5,17 +5,20 @@ import React, { useRef, useEffect, useState } from "react"
 // import { ExternalLink, Github, Code } from "lucide-react"
 // import { Button } from "@/components/ui/button"
 // import { Hue } from "../../../public/img"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { /* getFeaturedProjects, */ Project, projects } from "@/lib/projects"
 import { ProjectCard } from "../ui/projectCard"
 
 export const FeaturedProject: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsClient(true);
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,115 +37,78 @@ export const FeaturedProject: React.FC = () => {
     return () => clearTimeout(timer);
   }, [])
 
-  // Initialize GSAP
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return
-
-  //   gsap.registerPlugin(ScrollTrigger)
-
-  //   // Animate heading
-  //   if (headingRef.current) {
-  //     gsap.fromTo(
-  //       headingRef.current,
-  //       { opacity: 0, y: 30 },
-  //       {
-  //         opacity: 1,
-  //         y: 0,
-  //         duration: 1,
-  //         scrollTrigger: {
-  //           trigger: headingRef.current,
-  //           start: "top 80%",
-  //           toggleActions: "play none none none",
-  //         },
-  //       },
-  //     )
-  //   }
-
-  //   // Animate projects with stagger
-  //   if (projectsRef.current) {
-  //     const projectCards = projectsRef.current.querySelectorAll(".project-card")
-
-  //     gsap.fromTo(
-  //       projectCards,
-  //       { opacity: 0, y: 50 },
-  //       {
-  //         opacity: 1,
-  //         y: 0,
-  //         duration: 0.8,
-  //         stagger: 0.2,
-  //         ease: "power.easeOut",
-  //         scrollTrigger: {
-  //           trigger: projectsRef.current,
-  //           start: "top 90%",
-  //           toggleActions: "play pause none pause",
-  //         },
-  //       },
-  //     )
-  //   }
-
-  //   return () => {
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-  //   }
-  // }, [])
-
 
   useEffect(() => {
-    if (typeof window === "undefined" || isLoading) return
+    if (!isClient || isLoading) return
 
-    gsap.registerPlugin(ScrollTrigger)
-
-    const ctx = gsap.context(() => {
-      // Set initial states to prevent flicker
-      if (headingRef.current) {
-        gsap.set(headingRef.current, { opacity: 0, y: 30 })
-      }
-
-      if (projectsRef.current) {
-        const projectCards = projectsRef.current.querySelectorAll(".project-card")
-        gsap.set(projectCards, { opacity: 0, y: 50 })
-      }
-
-      // Animate heading
-      if (headingRef.current) {
-        gsap.to(headingRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-            once: false,
-            invalidateOnRefresh: true,
-          },
-        })
-      }
-
-      // Animate projects with stagger
-      if (projectsRef.current) {
-        const projectCards = projectsRef.current.querySelectorAll(".project-card")
-
-        if (projectCards.length > 0) {
-          gsap.to(projectCards, {
+    const initAnimation = async () => {
+      const gsapModule = await import("gsap")
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      const gsap = gsapModule.default
+      
+      gsap.registerPlugin(ScrollTrigger)
+  
+      const ctx = gsap.context(() => {
+        // Set initial states to prevent flicker
+        if (headingRef.current) {
+          gsap.set(headingRef.current, { opacity: 0, y: 30 })
+        }
+  
+        if (projectsRef.current) {
+          const projectCards = projectsRef.current.querySelectorAll(".project-card")
+          gsap.set(projectCards, { opacity: 0, y: 50 })
+        }
+  
+        // Animate heading
+        if (headingRef.current) {
+          gsap.to(headingRef.current, {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 1,
             ease: "power2.out",
             scrollTrigger: {
-              trigger: projectsRef.current,
-              start: "top 80%",
+              trigger: headingRef.current,
+              start: "top 85%",
               toggleActions: "play none none reverse",
               once: false,
               invalidateOnRefresh: true,
             },
           })
         }
-      }
-    }, sectionRef)
+  
+        // Animate projects with stagger
+        if (projectsRef.current) {
+          const projectCards = projectsRef.current.querySelectorAll(".project-card")
+  
+          if (projectCards.length > 0) {
+            gsap.to(projectCards, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: projectsRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+                once: false,
+                invalidateOnRefresh: true,
+              },
+            })
+          }
+        }
+      }, sectionRef)
+  
+      return () => ctx.revert()
+    }
 
-    return () => ctx.revert()
+    initAnimation();
+
+    return () => {
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      })
+    }
   }, [isLoading, featuredProjects])
 
 
