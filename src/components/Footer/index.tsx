@@ -52,9 +52,9 @@ export const Footer: React.FC = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 90%",
+          start: "top 97%",
           toggleActions: "play none play reverse",
-          once: false,
+          once: true,
           invalidateOnRefresh: true,
         },
       })
