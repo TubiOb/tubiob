@@ -332,7 +332,7 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Function to register animations with the main timeline
   const registerAnimation = <T extends HTMLElement>(
     element: React.RefObject<T>,
-    animation: (tl: any) => void,
+    animation: (tl: gsap.core.Timeline) => void,
     priority = 0,
   ) => {
     if (!element.current || !gsap) return
