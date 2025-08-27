@@ -3,7 +3,7 @@
 import React from "react"
 import { useEffect, useRef } from "react";
 import { Github, Linkedin, Twitter } from "lucide-react"
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 // import { useAnimation } from "@/context/AnimationContext";
@@ -77,18 +77,18 @@ export const Footer: React.FC = () => {
         <p className="text-gray-600 dark:text-gray-400 mb-4">Frontend Developer</p>
         <nav className="mb-4">
           <div className="flex justify-center space-x-4">
-            <Link href="/" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/') ? 'text-muted' : ''} `}>
+            <motion.a href="/" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/') ? 'text-muted' : ''} `}>
               Home
-            </Link>
-            <Link href="/about" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/about') ? 'text-muted' : ''} `}>
+            </motion.a>
+            <motion.a href="/about" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/about') ? 'text-muted' : ''} `}>
               About
-            </Link>
-            <Link href="/skills" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/skills') ? 'text-muted' : ''} `}>
+            </motion.a>
+            <motion.a href="/skills" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/skills') ? 'text-muted' : ''} `}>
               Portfolio
-            </Link>
-            <Link href="/contact" className={`text-[var(--light-text-color)] hover:text-secondary ${isActive('/contact') ? 'text-muted' : ''} `}>
+            </motion.a>
+            <motion.a href="/contact" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/contact') ? 'text-muted' : ''} `}>
               Contact
-            </Link>
+            </motion.a>
           </div>
         </nav>
         <div className="flex justify-center space-x-4 mb-4">

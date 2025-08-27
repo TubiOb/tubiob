@@ -98,10 +98,7 @@ export const Timeline: React.FC = () => {
       {/* Desktop Timeline (md and above) */}
       <div className="hidden md:block relative overflow-hidden p-10 h-full">
         {/* Center line for desktop */}
-        <div
-          className="absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full border"
-          style={{ left: "50%" }}
-        ></div>
+        <div className="absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full border" style={{ left: "50%" }} ></div>
 
         {timelineEvents.map((event, index) => (
           <motion.div
