@@ -21,7 +21,7 @@ const timelineEvents = [
   },
   {
     date: "2024",
-    title: "Learnt Typescript and Sort New Opportunities",
+    title: "Learnt Typescript and Sought New Opportunities",
     description: "Further expanded my skills with modern frameworks like Typescript. Ready to bring my skills and passion to a professional development team.",
   },
 ]
