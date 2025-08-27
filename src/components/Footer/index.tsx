@@ -4,7 +4,7 @@ import React from "react"
 import { useEffect, useRef } from "react";
 import { Github, Linkedin, Twitter } from "lucide-react"
 import { motion } from "framer-motion";
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from 'next/navigation';
 // import { useAnimation } from "@/context/AnimationContext";
 import gsap from "gsap"
