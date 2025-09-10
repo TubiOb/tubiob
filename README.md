@@ -46,3 +46,4 @@ Welcome to my digital space! I build user-friendly web experiences, focusing on 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tubiob&show_icons=true&theme=graywhite)](https://github.com/tubiob/github-readme-stats)  
 [![GitHub Streak](https://git-hub-streak-stats.vercel.app?user=tubiob&theme=graywhite)](https://git.io/streak-stats)
 ![Dmytro Baida's LeetCode stats light](https://leetcode-badge-sage.vercel.app/badge/tubiob?bgColor=fff)
+<!--- [![Github Readme Codewars](https://codewars-stats-ignacio-cuadra.vercel.app/?username=TubiOb&theme=default)](https://github.com/ignacio-cuadra/github-readme-codewars) --->
