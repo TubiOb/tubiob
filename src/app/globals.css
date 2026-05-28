@@ -1,10 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* @import "tailwindcss"; */
-
-
-  
 /* Import fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
 /* FONT IMPORT LINKS*/
@@ -12,6 +5,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Lato:wght@300&family=Niconne&family=Poppins:wght@300;400;500;600&family=Satisfy&family=Share+Tech+Mono&family=Ubuntu:wght@300&family=Yanone+Kaffeesatz:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Lato:wght@300&family=Lora:wght@400;500;600&family=Niconne&family=Poppins:wght@300;400;500;600&family=Satisfy&family=Share+Tech+Mono&family=Ubuntu:wght@300&family=Yanone+Kaffeesatz:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&family=Rubik:wght@300;400;500;600&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import "tailwindcss"; */
+
+
+  
 
 @layer base {
     :root {
