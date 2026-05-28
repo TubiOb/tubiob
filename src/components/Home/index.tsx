@@ -112,7 +112,7 @@ export const Home: React.FC = () => {
   const switchingTexts = [" Obaloluwa Tubi", " a Frontend Developer"]
 
   return (
-    <section ref={sectionRef} id="Home" className="py-16 px-4 flex items-start justify-center sm:px-6 lg:px-8 overflow-x-hidden">
+    <section ref={sectionRef} id="Home" className="py-8 lg:py-16 px-4 flex items-start justify-center sm:px-6 lg:px-8 overflow-x-hidden">
       <div ref={homeContentRef} className="max-w-6xl mx-auto h-[30rem]" >
         <div className="grid md:grid-cols-2 gap-8 items-center justify-center place-items-center my-auto z-10 h-full">
           {/* <div
