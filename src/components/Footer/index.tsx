@@ -1,14 +1,14 @@
 "use client"
 
 import React from "react"
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 import { Github, Linkedin, Twitter } from "lucide-react"
 import { motion } from "framer-motion";
 // import Link from "next/link";
 import { usePathname } from 'next/navigation';
 // import { useAnimation } from "@/context/AnimationContext";
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+// import gsap from "gsap"
+// import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 export const Footer: React.FC = () => {
   // const footerRef = useRef<HTMLElement>(null)

@@ -165,7 +165,7 @@ export const Home: React.FC = () => {
               toggleActions="play pause play pause"
             >
               I build web products that solve real problems; insurance platforms, hiring tools, healthcare infrastructure, using Next.js and TypeScript.
-              I have a particular depth in products built for emerging markets, where performance, cost, and reliability aren't nice-to-haves.
+              I have a particular depth in products built for emerging markets, where performance, cost, and reliability aren&apos;t nice-to-haves.
               {/* who is passionate about and creates fascinating web designs. I have keen interest in bringing services
               closer to users, as well as providing solutions by building user friendly and accessible websites. */}
               </TextReveal>
