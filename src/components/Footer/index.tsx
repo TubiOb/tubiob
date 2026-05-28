@@ -11,7 +11,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 export const Footer: React.FC = () => {
-  const footerRef = useRef<HTMLElement>(null)
+  // const footerRef = useRef<HTMLElement>(null)
   const pathname = usePathname();
 
   // const { registerAnimation } = useAnimation()
@@ -36,32 +36,32 @@ export const Footer: React.FC = () => {
   // }, [registerAnimation])
 
 
-  useEffect(() => {
-    if (!footerRef.current) return
+  // useEffect(() => {
+  //   if (!footerRef.current) return
 
-    gsap.registerPlugin(ScrollTrigger)
+  //   gsap.registerPlugin(ScrollTrigger)
 
-    const ctx = gsap.context(() => {
-      // Set initial state to prevent flicker
-      gsap.set(footerRef.current, { opacity: 1, y: 30 })
+  //   const ctx = gsap.context(() => {
+  //     // Set initial state to prevent flicker
+  //     gsap.set(footerRef.current, { opacity: 1, y: 30 })
 
-      gsap.to(footerRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 97%",
-          toggleActions: "play none play reverse",
-          once: true,
-          invalidateOnRefresh: false,
-        },
-      })
-    }, footerRef)
+  //     gsap.to(footerRef.current, {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 0.8,
+  //       ease: "power2.out",
+  //       scrollTrigger: {
+  //         trigger: footerRef.current,
+  //         start: "top 97%",
+  //         toggleActions: "play none play reverse",
+  //         once: true,
+  //         invalidateOnRefresh: false,
+  //       },
+  //     })
+  //   }, footerRef)
 
-    return () => ctx.revert()
-  }, []);
+  //   return () => ctx.revert()
+  // }, []);
 
 
   const isActive = (path: string) => {
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
 
 
   return (
-    <footer ref={footerRef} className="bg-background py-8 px-4 sm:px-6 lg:px-8 bottom-0 left-0 right-0">
+    <footer className="bg-background py-8 px-4 sm:px-6 lg:px-8 bottom-0 left-0 right-0">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-2xl font-bold mb-2">TubiOb</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Frontend Developer</p>

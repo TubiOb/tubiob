@@ -758,7 +758,17 @@ export const Header: React.FC = () => {
   }
 
   if (!mounted) {
-    return null;
+    return (
+      <header ref={headerRef} className="fixed w-full bottom-2 lg:bottom-auto lg:top-0 left-0 right-0 bg-transparent lg:bg-[var(--bg-color)] lg:shadow-lg shadow-[#445B6F1A] transition-all ease-in-out z-[100]">
+        <nav className="relative rounded-full lg:rounded-none bg-[var(--bg-color)] shadow-lg lg:shadow-none shadow-[#445B6F1A] border border-gray-100 dark:border-gray-800 lg:border-none py-3 px-6 flex justify-between items-center w-[90%] lg:max-w-[64rem] lg:w-auto h-[4rem] lg:h-[5rem] mx-auto z-[100]">
+          <Link href="/" className="text-base text-foreground">
+            TubiOb
+          </Link>
+          {/* nav links */}
+          <div className="w-6 h-6" /> {/* placeholder for theme button to prevent layout shift */}
+        </nav>
+      </header>
+    )
   }
 
   return (
