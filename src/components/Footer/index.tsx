@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
 
 
   return (
-    <footer className="bg-background py-8 px-4 sm:px-6 lg:px-8 bottom-0 left-0 right-0">
+    <footer className="bg-background py-3 lg:py-8 px-4 sm:px-6 lg:px-8 bottom-0 left-0 right-0">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-2xl font-bold mb-2">TubiOb</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Frontend Developer</p>
