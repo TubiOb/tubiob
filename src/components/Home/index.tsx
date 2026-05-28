@@ -10,6 +10,7 @@ import { useGSAPScrollAnimation } from "@/hooks/useGSAPScrollAnimation";
 import { TextReveal } from "../ui/textreveal"
 import { Typewriter } from "../ui/typewriter"
 import { useAnimation } from "@/context/AnimationContext"
+import { Button } from "../ui/button";
 
 export const Home: React.FC = () => {
   const [gsapInstance, setGsapInstance] = useState<typeof gsap | null>(null)
@@ -22,16 +23,22 @@ export const Home: React.FC = () => {
   const { registerAnimation } = useAnimation();
 
   // Initialize GSAP
-  useEffect(() => {
-    const initGSAP = async () => {
-      const gsapModule = await import("gsap")
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+  let gsapPromise: Promise<typeof gsap> | null = null;
 
-      gsapModule.default.registerPlugin(ScrollTrigger)
-      setGsapInstance(gsapModule.default)
+  const getGSAP = () => {
+    if (!gsapPromise) {
+      gsapPromise = import('gsap').then(async (mod) => {
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+        mod.default.registerPlugin(ScrollTrigger)
+        return mod.default
+      })
     }
+    return gsapPromise
+  }
 
-    initGSAP()
+
+  useEffect(() => {
+    getGSAP().then(setGsapInstance);
   }, [])
 
 
@@ -48,21 +55,21 @@ export const Home: React.FC = () => {
           tl.fromTo(
             sectionRef.current,
             { opacity: 0 },
-            { opacity: 1, duration: 0.5, ease: "power1.out" },
-            0.3, // Start slightly after header
+            { opacity: 1, duration: 0.2, ease: "power1.out" },
+            0, // Start slightly after header
           )
 
           // Then animate the profile and intro sections
           tl.fromTo(
             profileRef.current,
             { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            0.5, // Start after section background
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            0.1, // Start after section background
           ).fromTo(
             introRef.current,
             { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            0.7, // Start slightly after profile
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            0.2, // Start slightly after profile
           )
         },
         5, // Medium-high priority
@@ -78,7 +85,7 @@ export const Home: React.FC = () => {
     toggleActions: 'play pause play pause',
     from: { opacity: 0, y: 50 },
     to: { opacity: 1, y: 0, duration: 1, ease: "power.easeOut" },
-    exitTo: { opacity: 0.8, y: -40, duration: 1, ease: "power.easeIn" },
+    exitTo: { opacity: 0.5, y: -40, duration: 1, ease: "power.easeIn" },
   })
 
   useEffect(() => {
@@ -121,9 +128,9 @@ export const Home: React.FC = () => {
                 src={TubiOb}
                 alt="Tubi Obaloluwa Shalom"
                 className="rounded-3xl border-4 border-secondary object-cover"
-                priority={false}
+                priority={true}
                 fill
-                sizes={'fill'}
+                sizes="(max-width: 768px) 256px, 320px"
               />
             </div>
           {/* </div> */}
@@ -154,20 +161,34 @@ export const Home: React.FC = () => {
             <TextReveal
               className="text-foreground text-justify max-w-lg font-light"
               from={{ x: 50, opacity: 0 }}
-              to={{ x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }}
-              exitTo={{ x: -30, opacity: 0, duration: 0.5, ease: "power2.in" }}
+              to={{ x: 0, opacity: 1, duration: 0.2, ease: "power2.out" }}
+              exitTo={{ x: -30, opacity: 0, duration: 0.2, ease: "power2.in" }}
               toggleActions="play pause play pause"
             >
-              I build functional and efficient web applications using React, TypeScript, and Next.js, focusing on clean
-              code and practical solutions.
+              I build web products that solve real problems; insurance platforms, hiring tools, healthcare infrastructure, using Next.js and TypeScript.
+              I have a particular depth in products built for emerging markets, where performance, cost, and reliability aren't nice-to-haves.
               {/* who is passionate about and creates fascinating web designs. I have keen interest in bringing services
               closer to users, as well as providing solutions by building user friendly and accessible websites. */}
-            </TextReveal>
+              </TextReveal>
+
+            <div className='flex flex-row gap-6 mt-6 justify-center lg:justify-start'>
+              <Button asChild className="bg-white dark:text-neutral-600 text-[var(--text-color-light)] py-2 px-4 text-xs lg:text-sm rounded-lg shadow-sm border border-neutral-100 transition-colors duration-300">
+                <a href='/skills'>View my work</a>
+              </Button>
+              <button className="bg-black text-white py-2 px-4 text-xs lg:text-sm rounded-lg shadow-sm border border-white transition-colors duration-300">
+                <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' download target='_blank' rel='noreferrer'>Download CV</a>
+              </button>
+            </div>
+
+            <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">
+              <span className='py-0.5 px-1.5 rounded-full items-center text-center border border-neutral-200'>Next.js</span>
+              <span className='py-0.5 px-1.5 rounded-full items-center text-center border border-neutral-200'>TypeScript</span>
+              <span className='py-0.5 px-1.5 rounded-full items-center text-center border border-neutral-200'>React</span>
+              <span className='py-0.5 px-1.5 rounded-full items-center text-center border border-neutral-200'>Firebase</span>
+              <span className='py-0.5 px-1.5 rounded-full items-center text-center border border-neutral-200'>Git</span>
+            </div>
           </div>
         </div>
-        {/* <div ref={interactiveSkillsRef}>
-          <InteractiveSkills />
-        </div> */}
       </div>
     </section>
   )

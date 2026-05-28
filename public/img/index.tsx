@@ -1,4 +1,5 @@
-export { default as TubiOb } from './Snapchat-669189679.jpg'
+export { default as TubiOb1 } from './Snapchat-669189679.jpg'
+export { default as TubiOb } from './Obaloluwa Tubi.jpeg'
 export { default as Hue } from './Hueston Maintenance.png'
 export { default as Hivehub1 } from './Hivehub1.png'
 export { default as Hivehub2 } from './Hivehub2.png'
