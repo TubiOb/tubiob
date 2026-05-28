@@ -110,7 +110,7 @@ export const Home: React.FC = () => {
     }
   }, [gsapInstance])
 
-  const switchingTexts = ["Obaloluwa Tubi", "a Frontend Developer"]
+  const switchingTexts = [" Obaloluwa Tubi", " a Frontend Developer"]
 
   return (
     <section ref={sectionRef} id="Home" className="py-16 px-4 flex items-start justify-center sm:px-6 lg:px-8 overflow-x-hidden">
@@ -143,7 +143,7 @@ export const Home: React.FC = () => {
           >
             <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[var(--text-color-light)]">Hi there, <span className="text-2xl">👋</span></h3>
             <span className="text-3xl md:text-4xl font-normal mb-4">
-              {"I'm "}
+              I&apos;m
               <Typewriter texts={switchingTexts} speed={3000} delay={300} className='text-[var(--text-color-green)]' />
             </span>
             {/* <TextReveal
