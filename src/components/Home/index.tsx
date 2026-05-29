@@ -113,7 +113,7 @@ export const Home: React.FC = () => {
 
   return (
     <section ref={sectionRef} id="Home" className="py-8 lg:py-16 px-4 flex items-start justify-center sm:px-6 lg:px-8 overflow-x-hidden">
-      <div ref={homeContentRef} className="max-w-6xl mx-auto h-[30rem]" >
+      <div ref={homeContentRef} className="max-w-6xl mx-auto h-auto lg:h-[30rem]" >
         <div className="grid md:grid-cols-2 gap-8 items-center justify-center place-items-center my-auto z-10 h-full">
           {/* <div
             className="flex bg-green-600 h-auto rounded-3xl"
@@ -174,7 +174,7 @@ export const Home: React.FC = () => {
               <Button asChild className="bg-white dark:text-neutral-600 text-[var(--text-color-light)] py-2 px-4 text-xs lg:text-sm rounded-lg shadow-sm border border-neutral-100 transition-colors duration-300">
                 <a href='/skills'>View my work</a>
               </Button>
-              <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' className="bg-black text-white py-2 px-4 text-xs lg:text-sm items-center text-center rounded-lg shadow-sm border border-white transition-colors duration-300" download target='_blank' rel='noreferrer'>Download CV</a>
+              <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' className="bg-black text-white py-2.5 px-4 text-xs lg:text-sm items-center text-center justify-center rounded-lg shadow-sm border border-white transition-colors duration-300" download target='_blank' rel='noreferrer'>Download CV</a>
             </div>
 
             <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">

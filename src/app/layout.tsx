@@ -33,7 +33,7 @@ export default function RootLayout({
             <AnimationProvider>
               <div className="flex flex-col min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] transition-colors ease-in-out duration-300" style={{ backgroundColor: "var(--bg-color)", color: "var(--text-color)", fontFamily: "var(--font-sans)" }}>
                 <Header />
-                <main className="pb-[4rem] lg:pb-0 lg:pt-[5rem] relative z-10">{children}</main>
+                <main className="lg:pt-[5rem] relative z-10 mb-4">{children}</main>
                 <Footer />
               </div>
             </AnimationProvider>
