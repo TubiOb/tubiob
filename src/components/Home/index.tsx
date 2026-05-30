@@ -14,6 +14,18 @@ import { Button } from "../ui/button";
 
 let gsapPromise: Promise<typeof gsap> | null = null;
 
+const getGSAP = () => {
+  if (!gsapPromise) {
+    gsapPromise = import("gsap").then(async (mod) => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      mod.default.registerPlugin(ScrollTrigger)
+      return mod.default
+    })
+  }
+  return gsapPromise
+}
+
+
 export const Home: React.FC = () => {
   const [gsapInstance, setGsapInstance] = useState<typeof gsap | null>(null)
   const profileRef = useRef<HTMLDivElement>(null);
@@ -25,18 +37,6 @@ export const Home: React.FC = () => {
   const { registerAnimation } = useAnimation();
 
   // Initialize GSAP
-
-  const getGSAP = () => {
-    if (!gsapPromise) {
-      gsapPromise = import('gsap').then(async (mod) => {
-        const { ScrollTrigger } = await import("gsap/ScrollTrigger")
-        mod.default.registerPlugin(ScrollTrigger)
-        return mod.default
-      })
-    }
-    return gsapPromise
-  }
-
 
   useEffect(() => {
     getGSAP().then(setGsapInstance);
@@ -140,6 +140,10 @@ export const Home: React.FC = () => {
             // animate={{ opacity: 1, y: 0 }}
             // transition={{ duration: 0.5, delay: 0.2 }}
           >
+            <div className="bg-green-100 text-[var(--text-color-green)] font-medium text-xs lg:text-sm px-2 py-1 rounded-full inline-block mb-4 border border-green-400">
+              <span className='text-green-600 rounded-full mr-1'>•</span>
+              Available for work
+            </div>
             <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[var(--text-color-light)]">Hi there, <span className="text-2xl">👋</span></h3>
             <span className="text-3xl md:text-4xl font-normal mb-4">
               I&apos;m
@@ -178,11 +182,11 @@ export const Home: React.FC = () => {
             </div>
 
             <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-200'>Next.js</span>
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-200'>TypeScript</span>
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-200'>React</span>
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-200'>Firebase</span>
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-200'>Git</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Next.js</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>TypeScript</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>React</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Firebase</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Git</span>
             </div>
           </div>
         </div>

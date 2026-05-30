@@ -2,31 +2,92 @@
 
 import type React from "react"
 import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
 
 const timelineEvents = [
   {
     date: "2021",
     title: "Started Learning Web Development",
-    description: "Began my journey into web development, focusing on HTML, CSS, and JavaScript.",
+    description: "Started with HTML, CSS and JavaScript, building static pages and slowly understanding how the web actually works.",
   },
   {
     date: "2023",
     title: "First Freelance Project",
-    description: "Completed my first paid project, a website for a local business.",
+    description: "Completed my first paid project: a website for a local business. First time shipping something real to a real client.",
   },
   {
     date: "2023",
-    title: "Learned React",
-    description: "Expanded my skills to include modern frameworks like React.",
+    title: "Moved to React",
+    description: "Picked up React after realizing vanilla JS couldn't handle the state-heavy, multi-role apps I wanted to build. Things started clicking.",
   },
   {
     date: "2024",
-    title: "Learnt Typescript and Sought New Opportunities",
-    description: "Further expanded my skills with modern frameworks like Typescript. Ready to bring my skills and passion to a professional development team.",
+    title: "Typescript & Professional Readiness",
+    description: "Adopted Typescript across all projects after hitting too many runtime bugs. Started building with production habits: typed APIs, structured state, CI/CD",
   },
+  {
+    date: "2025",
+    title: "Building Bartr",
+    description: "Co-building Bartr, a marketplace for African users; handling the full Next.js web side: auth, trade lifecycle, search, image upload, and more.",
+  }
 ]
 
+
+let gsapPromise: Promise<typeof gsap> | null = null
+ 
+const getGSAP = () => {
+  if (!gsapPromise) {
+    gsapPromise = import("gsap").then(async (mod) => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      mod.default.registerPlugin(ScrollTrigger)
+      return mod.default
+    })
+  }
+  return gsapPromise
+}
+
+
 export const Timeline: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    let ctx: gsap.Context | null = null;
+
+    getGSAP().then((gsap) => {
+      ctx = gsap.context(() => {
+        cardRefs.current.forEach((card, index) => {
+          if (!card) return;
+
+          const fromX = index % 2 === 0 ? -40 : 40;
+
+          gsap.fromTo(
+            card,
+            { opacity: 0, x: fromX, y: 20 },
+            {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              duration: 0.7,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                // end: "bottom 60%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
+        })
+      }, containerRef)
+    })
+
+    return () => {
+      ctx?.revert();
+    }
+  }, [])
+
+
   return (
     // <div className="relative wrap overflow-hidden p-10 h-full mt-16">
     //   <div
@@ -58,7 +119,7 @@ export const Timeline: React.FC = () => {
 
 
 
-    <div className="mt-16">
+    <div ref={containerRef} className="mt-16">
       <h3 className="text-xl font-semibold mb-8 text-center md:text-left">My Journey</h3>
 
       {/* Mobile Timeline (sm and below) */}
@@ -68,12 +129,13 @@ export const Timeline: React.FC = () => {
           <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600"></div>
 
           {timelineEvents.map((event, index) => (
-            <motion.div
+            <div
               key={index}
               className="relative flex items-start mb-8 pl-16"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              ref={(el) => { cardRefs.current[index] = el }}
+              // initial={{ opacity: 0, x: -20 }}
+              // animate={{ opacity: 1, x: 0 }}
+              // transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               {/* Date circle for mobile */}
               <div className="absolute left-3 w-6 h-6 bg-[var(--bg-color)] border-2 border-[var(--card-color)] rounded-full flex items-center justify-center -translate-x-1/2">
@@ -90,7 +152,7 @@ export const Timeline: React.FC = () => {
                 </div>
                 <p className="text-sm leading-relaxed text-[var(--title-color)]">{event.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -101,12 +163,13 @@ export const Timeline: React.FC = () => {
         <div className="absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full border" style={{ left: "50%" }} ></div>
 
         {timelineEvents.map((event, index) => (
-          <motion.div
+          <div
             className={`mb-8 flex justify-between items-center w-full ${index % 2 === 0 ? "flex-row-reverse" : ""}`}
             key={index}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            ref={(el) => { cardRefs.current[index] = el }}
+            // initial={{ opacity: 0, y: 50 }}
+            // animate={{ opacity: 1, y: 0 }}
+            // transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <div className="order-1 w-5/12"></div>
 
@@ -120,7 +183,7 @@ export const Timeline: React.FC = () => {
               <h3 className="mb-3 font-bold text-[var(--text-color)] text-xl">{event.title}</h3>
               <p className="text-sm leading-snug tracking-wide text-[var(--title-color)]">{event.description}</p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
