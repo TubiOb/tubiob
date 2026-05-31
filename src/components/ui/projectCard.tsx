@@ -3,11 +3,12 @@
 import React from "react"
 
 import { useRef, useEffect } from "react"
-import { ExternalLink, Code } from "lucide-react"
+import { ExternalLink, Code, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import gsap from "gsap"
 import type { Project } from "@/lib/projects"
 import { ImageCarousel } from "@/components/ui/imageCarousel"
+import Link from "next/link"
 
 type ProjectCardProps = {
   project: Project
@@ -28,7 +29,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     // Create hover animations
     const enterAnimation = () => {
       gsap.to(card, {
-        y: -10,
+        y: -8,
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         duration: 0.3,
         ease: "power2.out",
@@ -92,17 +93,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-lg font-medium mb-2">{project.title}</h3>
+
+        <p className="text-[var(--text-color-green)] text-xs font-medium mb-2">
+          {project.tagline}
+        </p>
+        
         <p className="text-muted-foreground text-sm mb-4 flex-grow">{project.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech, i) => (
+          {project.stack.map((tech, i) => (
             <span key={i} className="text-xs bg-[var(--card-color)] backdrop-blur-sm text-foreground px-2 py-1 rounded-full">
               {tech}
             </span>
           ))}
         </div>
 
-        <div className="flex gap-3 mt-auto">
+        <div className="flex flex-wrap gap-3 mt-auto">
+          <Button asChild size="sm">
+            <Link href={project.caseStudyUrl}>
+              <BookOpen className="mr-2 h-4 w-4" /> Case Study
+            </Link>
+          </Button>
+
           {project.demoUrl && (
             <Button asChild variant="outline" size="sm">
               <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">

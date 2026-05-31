@@ -2,7 +2,7 @@
 
 import type React from "react"
 // import { motion } from "framer-motion"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useMemo } from "react"
 import { TextReveal } from "@/components/ui/textreveal"
 import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, Rocket, Workflow, } from "lucide-react"
 
@@ -76,61 +76,111 @@ const skills: SkillCategory[] = [
 ]
 
 export const InteractiveSkills: React.FC = () => {
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null)
-  const skillsRef = useRef<HTMLDivElement[]>([])
+  const flatSkills = useMemo(() => skills.flatMap((c) => c.skills), [])
+  const skillsRef = useRef<(HTMLDivElement | null)[]>([])
+
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, [])
+
 
   useEffect(() => {
-    setIsClient(true);
-  }, [])
+    let ctx: gsap.Context | null = null;
 
-  useEffect(() => {
-    if (!isClient) return
+    const indexMap = new Map<string, number>();
+    flatSkills.forEach((s, i) => indexMap.set(s.name, i));
 
-    const initAnimation = async () => {
-      const gsapModule = await import('gsap');
-      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-      const gsap = gsapModule.default;
-
+    import("gsap").then(async (mod) => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      const gsap = mod.default
       gsap.registerPlugin(ScrollTrigger)
-  
-      const allSkills = skills.flatMap(category => category.skills);
-      skillsRef.current = skillsRef.current.slice(0, allSkills.length)
-  
-      if (sectionRef.current) {
-        allSkills.forEach((skill, index) => {
-          const skillElement = skillsRef.current[index];
-          if (!skillElement) return
-  
-          gsap.fromTo(skillElement,
-            { opacity: 0, y: 50 },
+
+      ctx = gsap.context(() => {
+        skillsRef.current.forEach((el, index) => {
+          if (!el) return
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 40 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              delay: 0.2 + index * 0.05,
+              duration: 0.5,
+              delay: (index % 6) * 0.06,
               ease: "power2.out",
               scrollTrigger: {
-                trigger: skillElement,
-                start: "top 85%",
+                trigger: el,
+                start: "top 88%",
                 toggleActions: "play none none reverse",
-                once: false,
-                invalidateOnRefresh: true,
-              },
-            },
+              }
+             }
           )
         })
-      }
-    }
-
-    initAnimation();
+      }, sectionRef)
+    })
 
     return () => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      })
+      ctx?.revert();
     }
-  }, [isClient])
+  }, [flatSkills])
+
+
+
+  const flatIndexMap = useMemo(() => {
+    const map = new Map<string, number>();
+    flatSkills.forEach((s, i) => map.set(s.name, i));
+    return map;
+  }, [flatSkills])
+
+
+  // useEffect(() => {
+  //   if (!isClient) return
+
+  //   const initAnimation = async () => {
+  //     const gsapModule = await import('gsap');
+  //     const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+  //     const gsap = gsapModule.default;
+
+  //     gsap.registerPlugin(ScrollTrigger)
+  
+  //     const allSkills = skills.flatMap(category => category.skills);
+  //     skillsRef.current = skillsRef.current.slice(0, allSkills.length)
+  
+  //     if (sectionRef.current) {
+  //       allSkills.forEach((skill, index) => {
+  //         const skillElement = skillsRef.current[index];
+  //         if (!skillElement) return
+  
+  //         gsap.fromTo(skillElement,
+  //           { opacity: 0, y: 50 },
+  //           {
+  //             opacity: 1,
+  //             y: 0,
+  //             duration: 0.6,
+  //             delay: 0.2 + index * 0.05,
+  //             ease: "power2.out",
+  //             scrollTrigger: {
+  //               trigger: skillElement,
+  //               start: "top 85%",
+  //               toggleActions: "play none none reverse",
+  //               once: false,
+  //               invalidateOnRefresh: true,
+  //             },
+  //           },
+  //         )
+  //       })
+  //     }
+  //   }
+
+  //   initAnimation();
+
+  //   return () => {
+  //     import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+  //       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+  //     })
+  //   }
+  // }, [isClient])
 
 
   return (
@@ -165,35 +215,34 @@ export const InteractiveSkills: React.FC = () => {
         <div className="space-y-12">
           {skills.map((category) => (
             <div key={category.name} className="space-y-6">
-              <h3 className="text-lg font-medium mb-4">{category.name}</h3>
+              <h3 className="text-base font-medium mb-6 uppercase tracking-wide">{category.name}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                {category.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    ref={(el) => {
-                      // Adjust ref indexing to match the flattened allSkills array for GSAP
-                      const flatIndex = skills.flatMap(c => c.skills).findIndex(s => s.name === skill.name);
-                      if (el && flatIndex !== -1) {
-                        skillsRef.current[flatIndex] = el;
+                {category.skills.map((skill) => {
+                  const flatIndex = flatIndexMap.get(skill.name) ?? 0;
+                  return (
+                    <div
+                      key={skill.name}
+                      ref={(el) => { skillsRef.current[flatIndex] = el }}
+                      className="skill-item flex flex-col items-center justify-center p-4 bg-background rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow duration-300"
+                      style={
+                        {
+                          "--skill-color": skill.color,
+                        } as React.CSSProperties
                       }
-                    }}
-                    className="skill-item flex flex-col items-center justify-center p-4 bg-background rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow duration-300"
-                    style={
-                      {
-                        "--skill-color": skill.color,
-                      } as React.CSSProperties
-                    }
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = `0 0 15px ${skill.color}40`
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = ""
-                    }}
-                  >
-                    <div className="text-secondary mb-3" style={{ color: skill.color }}>{skill.icon}</div>
-                    <span className="text-sm font-normal text-center">{skill.name}</span>
-                  </div>
-                ))}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = `0 0 15px ${skill.color}40`
+                        e.currentTarget.style.borderColor = `${skill.color}60`
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = ""
+                        e.currentTarget.style.borderColor = ""
+                      }}
+                    >
+                      <div className="text-secondary mb-3" style={{ color: skill.color }}>{skill.icon}</div>
+                      <span className="text-sm font-normal text-center">{skill.name}</span>
+                    </div>
+                  )
+})}
               </div>
             </div>
           ))}
