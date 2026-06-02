@@ -11,6 +11,7 @@ import { TextReveal } from "../ui/textreveal"
 import { Typewriter } from "../ui/typewriter"
 import { useAnimation } from "@/context/AnimationContext"
 import { Button } from "../ui/button";
+import { Linkedin } from "lucide-react";
 
 let gsapPromise: Promise<typeof gsap> | null = null;
 
@@ -149,44 +150,44 @@ export const Home: React.FC = () => {
               I&apos;m
               <Typewriter texts={switchingTexts} speed={3000} delay={300} className='text-[var(--text-color-green)]' />
             </span>
-            {/* <TextReveal
-              className="text-3xl md:text-4xl font-normal mb-2"
-              from={{ y: 50, opacity: 0 }}
-              to={{ y: 0, opacity: 1, duration: 1, ease: "power2.out" }}
-              exitTo={{ y: -30, opacity: 0, duration: 0.8, ease: "power2.in" }}
-              toggleActions="play pause play pause"
-            >
-              Obaloluwa Tubi here.
-            </TextReveal>
-            <h2 className="text-2xl md:text-3xl font-normal mb-1">
-              A <span className="text-[var(--text-color-green)]">Frontend Developer</span>,
-            </h2> */}
             <TextReveal
               className="text-foreground text-justify max-w-lg font-light"
+              splitType="words"
               from={{ x: 50, opacity: 0 }}
               to={{ x: 0, opacity: 1, duration: 0.2, ease: "power2.out" }}
-              exitTo={{ x: -30, opacity: 0, duration: 0.2, ease: "power2.in" }}
-              toggleActions="play pause play pause"
+              stagger={0.04}
+              scrollTrigger={false}
+              delay={0.6}
+              // exitTo={{ x: -30, opacity: 1, duration: 0.2, ease: "power2.in" }}
             >
               I build web products that solve real problems; insurance platforms, hiring tools, healthcare infrastructure, using Next.js and TypeScript.
               I have a particular depth in products built for emerging markets, where performance, cost, and reliability aren&apos;t nice-to-haves.
-              {/* who is passionate about and creates fascinating web designs. I have keen interest in bringing services
-              closer to users, as well as providing solutions by building user friendly and accessible websites. */}
-              </TextReveal>
+            </TextReveal>
 
-            <div className='flex flex-row gap-6 mt-6 justify-center lg:justify-start'>
+            <div className='flex flex-wrap gap-6 mt-6 justify-center lg:justify-start'>
               <Button asChild className="bg-white dark:text-neutral-600 text-[var(--text-color-light)] py-2 px-4 text-xs lg:text-sm rounded-lg shadow-sm border border-neutral-100 transition-colors duration-300">
                 <a href='/skills'>View my work</a>
               </Button>
               <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' className="bg-black text-white py-2.5 px-4 text-xs lg:text-sm items-center text-center justify-center rounded-lg shadow-sm border border-white transition-colors duration-300" download target='_blank' rel='noreferrer'>Download CV</a>
+              <a
+                href="https://www.linkedin.com/in/obaloluwa-tubi-09a35617b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-secondary flex items-center text-center justify-center border border-neutral-200 shadow-sm rounded-xl py-2 px-3 transition-colors duration-300"
+              >
+                <Linkedin className="size-4" />
+              </a>
             </div>
 
             <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Next.js</span>
+              {['Next.js', 'TypeScript', 'React', 'Firebase', 'Git'].map((tech) => (
+                <span key={tech} className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>{tech}</span>
+              ))}
+              {/* <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Next.js</span>
               <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>TypeScript</span>
               <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>React</span>
               <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Firebase</span>
-              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Git</span>
+              <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Git</span> */}
             </div>
           </div>
         </div>

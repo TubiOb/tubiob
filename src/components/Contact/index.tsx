@@ -175,18 +175,19 @@ export const Contact: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold">Email</h4>
-                <p className="text-muted-foreground mb-2">tubiobaloluwa@gmail.com</p>
+                <a href="mailto:tubiobaloluwa@gmail.com" className="text-muted-foreground mb-2 hover:text-foreground transition-colors">
+                  tubiobaloluwa@gmail.com
+                </a>
               </div>
               <div>
                 <h4 className="font-semibold">WhatsApp</h4>
-                <p className="text-muted-foreground mb-2">+2348146933488</p>
                 <a
                   href="https://wa.link/83e60c"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-secondary hover:underline"
+                  className="text-secondary hover:text-foreground transition-colors flex items-center gap-1"
                 >
-                  Write me <Send className="inline-block ml-1 w-4 h-4" />
+                  Send a message <Send className="inline-block ml-1 w-4 h-4" />
                 </a>
               </div>
             </div>

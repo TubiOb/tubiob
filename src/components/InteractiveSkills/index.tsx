@@ -242,7 +242,7 @@ export const InteractiveSkills: React.FC = () => {
                       <span className="text-sm font-normal text-center">{skill.name}</span>
                     </div>
                   )
-})}
+                })}
               </div>
             </div>
           ))}
