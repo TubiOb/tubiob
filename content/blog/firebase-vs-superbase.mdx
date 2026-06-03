@@ -1,0 +1,45 @@
+---
+title: "Why I chose Firebase over Supabase for Bartr — and what I'd do differently"
+excerpt: "Firebase's real-time sync and Auth were hard to beat for an MVP. But Firestore's query limitations caught up with me faster than I expected. Here's what I'd weigh differently if I were starting today."
+date: "2025-06-01"
+tags: ["Firebase", "Next.js"]
+featured: true
+---
+
+When I started building Bartr — a barter marketplace where users trade items instead of paying cash — I had to pick a backend fast. The choice came down to Firebase and Supabase, and I went with Firebase. Six months later, I have opinions.
+
+## Why Firebase won at the start
+
+Three things made Firebase the easy choice for an MVP:
+
+**Auth is genuinely zero-config.** Email/password, Google OAuth, phone OTP — all of it works out of the box with a few lines of code. Supabase has Auth too, but Firebase's client SDK felt more mature at the time and I'd used it before.
+
+**Firestore's real-time listeners are magic for a marketplace.** When a user proposes a trade, the other party needs to see it immediately. `onSnapshot` gave me that with almost no effort — no polling, no websocket setup, no extra infrastructure.
+
+**The free Spark plan is genuinely generous.** For an MVP with uncertain traffic, not worrying about a Postgres instance or server costs was the right call.
+
+## Where Firestore started hurting
+
+About two months in, I hit the wall that every Firebase developer eventually hits: **Firestore can't JOIN**.
+
+Bartr needs queries like "show me all active trade proposals for listings in the Electronics category, sorted by recency, where the proposing user has a rating above 4." In SQL that's one query. In Firestore it's a denormalisation problem.
+
+I ended up duplicating data across documents — storing category and user rating on the trade proposal document itself — so I could query against them. It works, but now I have two sources of truth and a sync problem whenever user ratings update.
+
+The other issue was **compound queries requiring composite indexes**. Every time I added a new filter combination to the search flow, I had to create a new index in the Firebase console. At one point I had 14 indexes for a single collection. It's manageable, but it's friction.
+
+## What I'd weigh differently today
+
+If I were starting Bartr today, I'd seriously consider Supabase.
+
+The main reason: **Postgres means SQL, and SQL means you can query across relationships without denormalising everything**. The trade-off is more setup upfront, but a marketplace with complex filtering needs relational data.
+
+That said, Firebase still wins on one thing I haven't found a clean Supabase equivalent for: the **offline persistence** story. Firestore's offline cache is first-class. For Nigerian users on intermittent connections, that matters more than clean queries.
+
+So the honest answer is: Firebase was the right call for getting to MVP fast. Supabase would probably be the right call if I were starting with more certainty about the data model.
+
+## The actual lesson
+
+Don't pick your database based on what's familiar. Pick it based on **how your data relates**. If your data is mostly flat documents that need real-time sync, Firebase is excellent. If your data has relationships that you need to query across, use Postgres.
+
+I knew Firestore had no joins before I started. I underestimated how early that limitation would bite.

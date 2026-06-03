@@ -1,0 +1,105 @@
+---
+title: "GSAP ScrollTrigger without the global kill problem"
+excerpt: "Why ScrollTrigger.getAll().kill() silently breaks other components, and how gsap.context() fixes it in one line."
+date: "2025-05-20"
+tags: ["GSAP", "Next.js"]
+featured: false
+---
+
+If you've used GSAP ScrollTrigger in a Next.js app, you've probably written this cleanup at some point:
+
+```js
+return () => {
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+}
+```
+
+It feels responsible. It looks like cleanup. It's actually a bug.
+
+## What's actually happening
+
+`ScrollTrigger.getAll()` returns every ScrollTrigger on the page — not just the ones your component created. When your component unmounts and runs this cleanup, it kills the ScrollTrigger instances created by your header, your footer, your other page sections, everything.
+
+In a single-page app where components mount and unmount during navigation, this causes animations on other components to stop working silently. No error, no warning — they just don't animate anymore.
+
+I hit this while building my portfolio. After navigating between pages, the timeline animations on the About page would stop triggering. I spent two hours debugging before I realised my Home component's cleanup was killing everything when it unmounted.
+
+## The fix: gsap.context()
+
+GSAP added `gsap.context()` specifically to solve this. It creates a scoped context that tracks every animation and ScrollTrigger created inside it:
+
+```js
+useEffect(() => {
+  let ctx = null
+
+  getGSAP().then((gsap) => {
+    ctx = gsap.context(() => {
+      // Every gsap.to, gsap.fromTo, ScrollTrigger created
+      // in here belongs to this context
+      gsap.fromTo(myRef.current, { opacity: 0 }, { opacity: 1 })
+
+      ScrollTrigger.create({
+        trigger: myRef.current,
+        start: "top 80%",
+        onEnter: () => console.log("entered")
+      })
+    }, containerRef) // scope to a container element
+  })
+
+  // This only kills what THIS component created
+  return () => ctx?.revert()
+}, [])
+```
+
+`ctx.revert()` kills only the animations and ScrollTriggers created inside that specific context. Nothing else on the page is touched.
+
+## The second problem: initialising GSAP inside components
+
+There's another issue I ran into: initialising GSAP with a dynamic import inside a component means every render creates a new import promise — even though the module is already cached.
+
+```js
+// Inside component — wrong
+const [gsap, setGsap] = useState(null)
+useEffect(() => {
+  import('gsap').then(mod => setGsap(mod.default))
+}, [])
+```
+
+The import itself is cached by the browser, but the promise isn't — so every component instance creates a new one. Over time, on a page with many animated components, this adds up.
+
+The fix is to hoist the promise outside the component:
+
+```js
+// Outside component — correct
+let gsapPromise = null
+const getGSAP = () => {
+  if (!gsapPromise) {
+    gsapPromise = import('gsap').then(async (mod) => {
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+      mod.default.registerPlugin(ScrollTrigger)
+      return mod.default
+    })
+  }
+  return gsapPromise
+}
+
+// Inside component
+useEffect(() => {
+  let ctx = null
+  getGSAP().then((gsap) => {
+    ctx = gsap.context(() => { /* animations */ })
+  })
+  return () => ctx?.revert()
+}, [])
+```
+
+Now the promise is created once at module load time and reused across all component instances.
+
+## Summary
+
+Two rules for GSAP in Next.js:
+
+1. Always use `gsap.context()` and clean up with `ctx.revert()` — never `ScrollTrigger.getAll().kill()`
+2. Hoist the GSAP import promise outside your components so it's shared across instances
+
+Neither of these is obvious from the GSAP docs, and both took me real debugging time to figure out.

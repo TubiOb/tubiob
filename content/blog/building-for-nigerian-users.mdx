@@ -1,0 +1,79 @@
+---
+title: "What building for Nigerian users taught me about performance"
+excerpt: "When internet costs money per MB, 'good enough' performance isn't. The specific changes I made and why they mattered."
+date: "2025-04-15"
+tags: ["Product thinking", "Next.js"]
+featured: false
+---
+
+Most performance advice I read is written by developers in San Francisco or London, targeting users with fast wifi and unlimited data plans. When I started building products for Nigerian users, I had to relearn what "good performance" actually means.
+
+This isn't abstract. Internet in Nigeria is expensive. A 1GB data plan costs real money relative to daily wages. Users on mobile networks regularly drop between 4G and 2G mid-session. Devices are often mid-range or low-end with limited RAM.
+
+Here's what I actually changed.
+
+## Images were the first thing to fix
+
+I was using `sizes="fill"` on Next.js Image components, which is not a valid value. It caused the browser to fetch unnecessarily large images because it had no sizing hint.
+
+Fixing it:
+
+```jsx
+// Before — browser fetches a large default image
+<Image src={src} fill sizes="fill" />
+
+// After — browser fetches the right size for the viewport
+<Image
+  src={src}
+  fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+/>
+```
+
+On a slow connection, this matters. The browser uses the `sizes` attribute to decide which image from the srcset to download. Without it, it guesses — and it usually guesses large.
+
+I also switched all project images from PNG to WebP, which cut file sizes by 30-50% with no visible quality difference.
+
+## JavaScript bundles ship too much
+
+By default, Next.js ships your entire JavaScript bundle to the client. For a portfolio or marketplace with heavy dependencies (GSAP, Firebase, Algolia), this adds up fast.
+
+The fix is lazy loading anything that isn't needed on the initial render:
+
+```js
+// Before — GSAP loads synchronously on page load
+import gsap from 'gsap'
+
+// After — GSAP loads only when the animation is needed
+const gsap = await import('gsap').then(m => m.default)
+```
+
+For Firebase specifically, I split the client and admin SDKs into separate files so the admin SDK never ships to the browser at all.
+
+## Fonts were a hidden cost
+
+I was loading all 9 weights of Poppins:
+
+```js
+const poppins = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+})
+```
+
+Each weight is a separate font file. Loading all nine means 9 HTTP requests and several hundred kilobytes of font data on first load.
+
+I actually only use three weights in practice — 300 (light), 400 (regular), and 500 (medium). Cutting to just those three reduced font payload by roughly 65%.
+
+## Offline support is a product decision, not a tech decision
+
+The change that made the most difference wasn't technical — it was deciding early that the app needed to work on bad connections, not just fast ones.
+
+That decision changed how I structured API calls (optimistic updates instead of waiting for server confirmation), how I handled loading states (skeleton screens instead of spinners, which imply a definite wait), and how I communicated errors (distinguishing "request failed" from "you're offline").
+
+Users on intermittent connections don't experience "slow loading" the way Western users do. They experience complete failures — the page loads, then freezes, then sometimes recovers. Designing for that failure mode is different from designing for slowness.
+
+## The honest summary
+
+Most of what I changed wasn't exotic. Better `sizes` on images. Fewer font weights. Lazy-loaded dependencies. These are basic things that Next.js and the web platform handle well — I just hadn't been paying attention.
+
+The shift was treating performance as a product constraint from the start, not an optimisation to add later. When your users are paying per megabyte, performance isn't a nice-to-have.

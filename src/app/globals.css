@@ -147,6 +147,19 @@ body {
     }
 }
 
+.prose-custom h2 { @apply text-xl font-medium mt-10 mb-4; }
+.prose-custom h3 { @apply text-lg font-medium mt-8 mb-3; }
+.prose-custom p  { @apply text-sm leading-relaxed mb-5; }
+.prose-custom ul { @apply list-disc list-outside pl-5 mb-5 space-y-2; }
+.prose-custom ol { @apply list-decimal list-outside pl-5 mb-5 space-y-2; }
+.prose-custom li { @apply text-base leading-relaxed; }
+.prose-custom blockquote { @apply border-l-4 border-[var(--text-color-green)] pl-5 py-1 my-6 italic text-muted-foreground; }
+.prose-custom code { @apply font-mono text-sm bg-[var(--card-color)] px-1.5 py-0.5 rounded; }
+.prose-custom pre  { @apply bg-[var(--card-color)] rounded-lg p-5 overflow-x-auto my-6 text-sm font-mono; }
+.prose-custom pre code { @apply bg-transparent p-0; }
+.prose-custom strong { @apply font-medium; }
+.prose-custom a { @apply text-[var(--text-color-green)] underline underline-offset-2; }
+.prose-custom hr { @apply border-t border-border my-10; }
 
 /* UNIVERSAL */
 

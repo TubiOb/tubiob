@@ -86,6 +86,9 @@ export const Footer: React.FC = () => {
             <motion.a href="/skills" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/skills') ? 'text-muted' : ''} `}>
               Portfolio
             </motion.a>
+            {/* <motion.a href="/blog" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/blog') ? 'text-muted' : ''} `}>
+              Blog
+            </motion.a> */}
             <motion.a href="/contact" className={`nav-link text-[var(--light-text-color)] hover:text-secondary ${isActive('/contact') ? 'text-muted' : ''} `}>
               Contact
             </motion.a>

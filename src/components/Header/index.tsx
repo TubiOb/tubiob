@@ -689,7 +689,7 @@
 
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { Moon, Sun, Menu, X, HomeIcon as House, User, Cpu, BotMessageSquare } from "lucide-react";
+import { Moon, Sun, Menu, X, HomeIcon as House, User, Cpu, BotMessageSquare, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
@@ -790,6 +790,9 @@ export const Header: React.FC = () => {
             <motion.a href="/skills" className={`nav-link text-[0.941rem] ${isActive("/skills") ? "text-muted" : ""}`} whileHover={{ scale: 0.97 }} whileTap={{ scale: 0.95 }}>
               Portfolio
             </motion.a>
+            {/* <motion.a href="/blog" className={`nav-link text-[0.941rem] ${isActive("/blog") ? "text-muted" : ""}`} whileHover={{ scale: 0.97 }} whileTap={{ scale: 0.95 }}>
+              Blog
+            </motion.a> */}
             <motion.a href="/contact" className={`nav-link text-[0.941rem] ${isActive("/contact") ? "text-muted" : ""}`} whileHover={{ scale: 0.97 }} whileTap={{ scale: 0.95 }}>
               Contact
             </motion.a>
@@ -841,6 +844,9 @@ export const Header: React.FC = () => {
               <motion.a href="/skills" className={`nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] ${isActive("/skills") ? "text-muted" : ""}`} whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }} onClick={closeMenu}>
                 <Cpu className="text-[1.125rem]" /> Portfolio
               </motion.a>
+              {/* <motion.a href="/blog" className={`nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] ${isActive("/blog") ? "text-muted" : ""}`} whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }} onClick={closeMenu}>
+                <PenTool className="text-[1.125rem]" /> Blog
+              </motion.a> */}
               <motion.a href="/contact" className={`nav-link flex flex-col items-center justify-center gap-y-1 text-[0.75rem] ${isActive("/contact") ? "text-muted" : ""}`} whileHover={{ scale: 0.99 }} whileTap={{ scale: 0.95 }} onClick={closeMenu}>
                 <BotMessageSquare className="text-[1.125rem]" /> Contact
               </motion.a>
