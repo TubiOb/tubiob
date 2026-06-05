@@ -1,4 +1,4 @@
-import { Playcv, Playcv1, Playcv2, Playcv3 } from "../../public/img"
+// import { Playcv, Playcv1, Playcv2, Playcv3 } from "../../public/img"
 
 export type ChallengeItem = {
   challenge: string
