@@ -1,4 +1,4 @@
-// import { Hivehub1, Hivehub2, Hivehub3, Shopify1, Shopify2, PlayCV, PlayCV1, PlayCV2, PlayCV3 } from "../../public/img"
+import { Playcv, Playcv1, Playcv2, Playcv3 } from "../../public/img"
 
 export type ChallengeItem = {
   challenge: string
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     ],
     outcome: "Shipped a working dual-surface platform with real monetisation. The NX setup in particular was a new skill that opened up how I think about multi-app projects.",
     whatILearned: "Designing payment flows is mostly UX work, not API work. Most of the complexity is in what happens after payment fails, not after it succeeds.",
-    images: ["/img/Playcv.png", '/img/Playcv1.png', '/img/Playcv2.png', '/img/Playcv3.png'],
+    images: ["/img/Playcv.png", "/img/Playcv1.png", "/img/Playcv2.png", "/img/Playcv3.png"],
     demoUrl: "https://dev.playcv.ng/",
     codeUrl: "",
     caseStudyUrl: "/case-study/playcv",
