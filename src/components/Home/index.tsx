@@ -168,7 +168,7 @@ export const Home: React.FC = () => {
               <Button asChild className="bg-white dark:text-neutral-600 text-[var(--text-color-light)] py-2 px-4 text-xs lg:text-sm rounded-lg shadow-sm border border-neutral-100 transition-colors duration-300">
                 <a href='/skills'>View my work</a>
               </Button>
-              <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' className="bg-black text-white py-2.5 px-4 text-xs lg:text-sm items-center text-center justify-center rounded-lg shadow-sm border border-white transition-colors duration-300" download target='_blank' rel='noreferrer'>Download CV</a>
+              <a href='https://drive.google.com/file/d/14LM1Y0pjnwP4M7wtdOqUTa1Mh_p8JO1t/view?usp=drive_link' className="bg-[#181a1b] text-white py-2.5 px-4 text-xs lg:text-sm items-center text-center justify-center rounded-lg shadow-sm border border-white transition-colors duration-300" download target='_blank' rel='noreferrer'>Download CV</a>
               <a
                 href="https://www.linkedin.com/in/obaloluwa-tubi-09a35617b/"
                 target="_blank"

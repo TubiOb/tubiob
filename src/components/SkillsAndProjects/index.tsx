@@ -56,39 +56,6 @@ export const SkillsAndProjects: React.FC = () => {
             { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 }
           )
         }
-    
-        // Text columns animation with a slight stagger and different directions
-        // if (leftColumnRef.current && rightColumnRef.current) {
-        //   tl.fromTo(
-        //     leftColumnRef.current,
-        //     { opacity: 0, x: -50 },
-        //     { opacity: 1, x: 0, duration: 0.8 },
-        //     "-=0.4"
-        //   ).fromTo(
-        //     rightColumnRef.current,
-        //     { opacity: 0, x: 50 },
-        //     { opacity: 1, x: 0, duration: 0.8 },
-        //     "-=0.6"
-        //   )
-        // }
-    
-        // Stats cards animation with a bounce effect
-        // if (tabsRef.current) {
-        //   const cards = tabsRef.current.querySelectorAll(".stat-card")
-        //   tl.fromTo(
-        //     cards,
-        //     { opacity: 0, y: 30, scale: 0.9 },
-        //     {
-        //       opacity: 1,
-        //       y: 0,
-        //       scale: 1,
-        //       duration: 0.6,
-        //       stagger: 0.2,
-        //       ease: "back.out(1.7)", // Add a slight bounce
-        //     },
-        //     "-=0.4",
-        //   )
-        // }
 
 
         if (tabsRef.current) {
@@ -99,42 +66,6 @@ export const SkillsAndProjects: React.FC = () => {
             "-=0.4"
           )
         }
-
-    
-        // Button animation with a slight pulse
-        // if (buttonRef.current) {
-        //   tl.fromTo(
-        //     buttonRef.current,
-        //     { opacity: 0, y: 20 },
-        //     { opacity: 1, y: 0, duration: 0.5 },
-        //     "-=0.2"
-        //   ).to(
-        //     buttonRef.current,
-        //     {
-        //       scale: 1.05,
-        //       duration: 0.3,
-        //       repeat: 1,
-        //       yoyo: true,
-        //       ease: "power1.inOut",
-        //     },
-        //   )
-        // }
-    
-        // Text highlight animation for the "About Me" section
-        // if (leftColumnRef.current) {
-        //   const highlights = leftColumnRef.current.querySelectorAll(".text-secondary")
-        //   gsap.fromTo(
-        //     highlights,
-        //     { color: "var(--text-color)", fontWeight: "normal" },
-        //     {
-        //       color: "var(--secondary)",
-        //       fontWeight: "semibold",
-        //       duration: 1,
-        //       delay: 1.5,
-        //       ease: "power2.inOut",
-        //     },
-        //   )
-        // }
     
         // Parallax effect for the entire section
         if (sectionRef.current) {
@@ -157,7 +88,7 @@ export const SkillsAndProjects: React.FC = () => {
     return () => {
       ctx?.revert();
     }
-  })
+  }, []);
 
 
   // useEffect(() => {
@@ -275,15 +206,15 @@ export const SkillsAndProjects: React.FC = () => {
 
   return (
     <section ref={sectionRef} id="Skills" className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div ref={headingRef}>
           <h2 className="text-2xl font-semibold mb-8">Skills and Projects</h2>
         </div>
         <div ref={tabsRef}>
           <Tabs defaultValue="projects">
             <TabsList className="mb-8 gap-4">
-              <TabsTrigger className='text-lg' value="projects">Projects</TabsTrigger>
-              <TabsTrigger className='text-lg' value="skills">Professional Skills</TabsTrigger>
+              <TabsTrigger className='text-lg border-none outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-100 data-[state=active]:outline-none' value="projects">Projects</TabsTrigger>
+              <TabsTrigger className='text-lg border-none outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-100 data-[state=active]:outline-none' value="skills">Professional Skills</TabsTrigger>
             </TabsList>
             <TabsContent value="projects">
               <OtherProject />

@@ -73,10 +73,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   }, [])
 
   return (
-    <div
-      ref={cardRef}
-      className="bg-background rounded-lg shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full"
-    >
+    <div ref={cardRef} className="bg-background rounded-lg shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full" >
       <ImageCarousel images={project.images} alt={project.title} />
 
       {/* <div ref={imageRef} className="relative h-48 w-full overflow-hidden">

@@ -7,6 +7,7 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react"
 import { Project } from "@/lib/projects"
 
 let gsapPromise: Promise<typeof gsap> | null = null
+
 const getGSAP = () => {
   if (!gsapPromise) {
     gsapPromise = import("gsap").then(async (mod) => {
@@ -71,10 +72,7 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
       <div className="max-w-3xl mx-auto">
 
         {/* Back link */}
-        <Link
-          href="/skills"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-12 group"
-        >
+        <Link href="/skills" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-12 group" >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to projects
         </Link>
@@ -84,7 +82,7 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
           <p className="text-sm text-muted-foreground mb-3 uppercase tracking-widest">
             Case Study
           </p>
-          <h1 className="text-4xl md:text-5xl font-semibold mb-4 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-4 leading-tight">
             {project.title}
           </h1>
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -181,6 +179,18 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
             </div>
           </section>
 
+          {project.images && (
+            <div className="cs-section relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-16 shadow-lg border border-[var(--border-color,#e5e7eb)]">
+              <Image
+                src={project.images[1]}
+                alt={`${project.title} screenshot`}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
+          )}
+
           {/* Challenges */}
           <section className="cs-section">
             <SectionLabel>Challenges & Solutions</SectionLabel>
@@ -206,6 +216,18 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
               ))}
             </div>
           </section>
+
+          {project.images && (
+            <div className="cs-section relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-16 shadow-lg border border-[var(--border-color,#e5e7eb)]">
+              <Image
+                src={project.images[2]}
+                alt={`${project.title} screenshot`}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
+          )}
 
           {/* Outcome */}
           <section className="cs-section">
