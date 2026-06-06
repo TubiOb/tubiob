@@ -4,7 +4,7 @@ import type React from "react"
 // import { motion } from "framer-motion"
 import { useRef, useEffect, useState, useMemo } from "react"
 import { TextReveal } from "@/components/ui/textreveal"
-import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, Rocket, Workflow, } from "lucide-react"
+import { Code, FileCode, FileJson, Layers, Palette, LayoutGrid, SquareStack, Box, Figma, Github, GitBranch, Smartphone, Gauge, Accessibility, Globe, Server, Database, Cloud, Play, ImageIcon, CreditCard, Rocket, Workflow, Shell, } from "lucide-react"
 
 type Skill = {
   name: string
@@ -37,6 +37,7 @@ const skills: SkillCategory[] = [
       { name: "Chakra UI", icon: <Box className="h-8 w-8" />, color: "#319795" }, // Chakra teal
       { name: "Styled Components", icon: <Palette className="h-8 w-8" />, color: "#DB7093" }, // Styled pink
       { name: "Framer Motion", icon: <Play className="h-8 w-8" />, color: "#0055FF" }, // Framer blue
+      { name: "Shadcn UI", icon: <Shell className="h-8 w-8" />, color: "#18181b" }, // Shadcn purple
     ],
   },
   {
