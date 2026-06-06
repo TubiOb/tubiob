@@ -213,8 +213,8 @@ export const SkillsAndProjects: React.FC = () => {
         <div ref={tabsRef}>
           <Tabs defaultValue="projects">
             <TabsList className="mb-8 gap-4">
-              <TabsTrigger className='text-lg border-none outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-100 data-[state=active]:outline-none' value="projects">Projects</TabsTrigger>
-              <TabsTrigger className='text-lg border-none outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-100 data-[state=active]:outline-none' value="skills">Professional Skills</TabsTrigger>
+              <TabsTrigger className='text-lg border-transparent outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-200/50 data-[state=active]:outline-none rounded-xl' value="projects">Projects</TabsTrigger>
+              <TabsTrigger className='text-lg border-transparent outline-none data-[state=active]:text-[var(--text-color-green)] data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-neutral-200/50 data-[state=active]:outline-none rounded-xl' value="skills">Professional Skills</TabsTrigger>
             </TabsList>
             <TabsContent value="projects">
               <OtherProject />
