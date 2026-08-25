@@ -7,8 +7,20 @@ const nextConfig: NextConfig = {
   // /* config options here */
   pageExtensions: ["ts", "tsx", "mdx"],
   reactStrictMode: true,
+  // images: {
+  //   domains: ["localhost"],
+  // },
   images: {
-    domains: ["localhost"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+    ],
   },
 };
 

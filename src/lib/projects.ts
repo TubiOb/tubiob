@@ -90,7 +90,7 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    id: "hive-hub",
+    id: "hivehub",
     title: "Hivehub",
     tagline: "An open publishing platform where thoughtful writing finds its audience.",
     description:
