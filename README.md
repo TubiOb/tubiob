@@ -47,8 +47,8 @@ Welcome to my digital space! I build user-friendly web experiences, focusing on 
 [![GitHub Streak](https://git-hub-streak-stats.vercel.app?user=tubiob&theme=graywhite)](https://git.io/streak-stats)
 ![Dmytro Baida's LeetCode stats light](https://leetcode-badge-sage.vercel.app/badge/tubiob?bgColor=fff) --->
 
-[![GitHub Stats](https://github-readme-stats-fast.vercel.app/api?username=Tubiob&show_icons=true&theme=graywhite)](https://github.com/tubiob/github-readme-stats-fast)
-[![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/streak?username=Tubiob&theme=graywhite)]
-[![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/top-langs/?username=Tubiob&layout=compact&theme=graywhite)]
+![GitHub Stats](https://github-readme-stats-fast.vercel.app/api?username=Tubiob&show_icons=true&theme=graywhite)(https://github.com/tubiob/github-readme-stats-fast)
+![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/streak?username=Tubiob&theme=graywhite)
+![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/top-langs/?username=Tubiob&layout=compact&theme=graywhite)
 
 <!--- [![Github Readme Codewars](https://codewars-stats-ignacio-cuadra.vercel.app/?username=TubiOb&theme=default)](https://github.com/ignacio-cuadra/github-readme-codewars) --->
