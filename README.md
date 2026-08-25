@@ -50,5 +50,6 @@ Welcome to my digital space! I build user-friendly web experiences, focusing on 
 ![GitHub Stats](https://github-readme-stats-fast.vercel.app/api?username=Tubiob&show_icons=true&theme=graywhite) 
 ![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/streak?username=Tubiob&theme=graywhite) 
 ![GitHub Stats](https://github-readme-stats-fast.vercel.app/api/top-langs/?username=Tubiob&layout=compact&theme=graywhite)
+![LeetCode Stats](https://leetcard.jacoblin.cool/TubiOb?theme=Roboto%20Mono&font=Poppins&ext=heatmap)
 
 <!--- [![Github Readme Codewars](https://codewars-stats-ignacio-cuadra.vercel.app/?username=TubiOb&theme=default)](https://github.com/ignacio-cuadra/github-readme-codewars) --->
