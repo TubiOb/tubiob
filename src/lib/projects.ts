@@ -54,6 +54,45 @@ export const projects: Project[] = [
     featured: false,
   },
   {
+    id: "tudisallafrican",
+    title: "Tudis All African",
+    tagline: "An e-commerce platform bringing authentic African fashion to customers worldwide.",
+    description: "A full WooCommerce store for Tudis All African, a boutique offering authentic African ready-to-wear fashion for women, men, and children. Covers product catalogue, payment integration, SEO, and responsive UI.",
+    role: "Sole developer (freelance)",
+    problem: "Tudis All African was selling exclusively in-person in San Antonio with no online presence. The founder needed a complete e-commerce platform that could showcase premium African textiles, handle product management at scale, and reach customers outside Texas — without a large technical budget.",
+    keyDecisions: [
+      "Chose WordPress + WooCommerce over a custom build because the client needed to manage products, orders, and inventory herself after handoff — a no-code CMS was the right tool for that ownership model, not a React app she couldn't maintain.",
+      "Selected a free theme (not Astra) and customised it heavily through the WordPress Customiser and custom CSS, rather than paying for a premium theme — keeping the project within the client's budget while still achieving a polished result.",
+      "Used WooCommerce's built-in CSV bulk import tool for mass product upload rather than adding products one by one — a decision that saved days of manual data entry given the size of the catalogue.",
+    ],
+    challenges: [
+      {
+        challenge: "Customising the header navigation and footer to match the boutique's brand without access to premium page builder features or a paid theme's full option panel.",
+        solution: "Used the WordPress theme Customiser combined with targeted custom CSS injected via the Additional CSS panel to override default styles — slower than a drag-and-drop builder but free and effective.",
+      },
+      {
+        challenge: "Getting up to speed with the WordPress ecosystem from scratch — plugin selection, theme hierarchy, WooCommerce settings, and the difference between the block editor and classic editor — all on a live client project.",
+        solution: "Worked methodically through WordPress documentation and WooCommerce's official guides, staging changes locally before pushing to the live Namecheap-hosted site to avoid breaking anything for the client.",
+      },
+      {
+        challenge: "Mass-uploading a large product catalogue with images, variants, pricing, and categories in a format WooCommerce could accept.",
+        solution: "Prepared a properly structured CSV file matching WooCommerce's import template, tested with a small batch first, then imported the full catalogue in one operation — reducing what would have been days of work to a few hours.",
+      },
+      {
+        challenge: "Selecting the right plugins for SEO, performance, and payment without bloating the site or introducing conflicts — a common WordPress pitfall.",
+        solution: "Installed only what was essential: one SEO plugin (Yoast or similar), WooCommerce's native payment options, and a caching plugin. Avoided the temptation to add plugins for every small feature.",
+      },
+    ],
+    outcome: "Delivered a fully functional e-commerce store live at tudisallafrican.com, with a complete product catalogue, payment processing, SEO configuration, and a CMS the client could manage independently. First paid freelance project delivered end-to-end.",
+    whatILearned: "WordPress taught me that the right tool depends on who owns the product after you leave. A React app would have been more fun to build but would have left the client helpless. Choosing boring, appropriate technology over impressive technology is sometimes the more professional call.",
+    images: ["/img/Tudis.png", '/img/Tudis (1).png', '/img/Tudis (2).png', '/img/Tudis (3).png', '/img/Tudis (4).png'],
+    demoUrl: "https://tudisallafrican.com",
+    codeUrl: '',
+    caseStudyUrl: "/case-study/tudisallafrican",
+    stack: [ "WordPress", "WooCommerce", "Custom CSS", "Namecheap (hosting + domain)", "Yoast SEO", "E-commerce SEO", ],
+    featured: false,
+  },
+  {
     id: "playcv",
     title: "PlayCV",
     tagline: "Helping Nigerian graduates get noticed by employers through video CVs.",
