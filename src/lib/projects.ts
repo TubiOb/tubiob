@@ -122,7 +122,7 @@ export const projects: Project[] = [
     outcome: "Shipped a working dual-surface platform with real monetisation. The NX setup in particular was a new skill that opened up how I think about multi-app projects.",
     whatILearned: "Designing payment flows is mostly UX work, not API work. Most of the complexity is in what happens after payment fails, not after it succeeds.",
     images: ["/img/Playcv.png", "/img/Playcv1.png", "/img/Playcv2.png", "/img/Playcv3.png"],
-    demoUrl: "https://dev.playcv.ng/",
+    demoUrl: "",
     codeUrl: "",
     caseStudyUrl: "/case-study/playcv",
     stack: ["Typescript", 'Axios', "MUI", 'Paystack API', 'Tiptap Rich Editor', 'Cloudflare Integration', "API Integration", "NX", 'Yarn', 'Zod'],
