@@ -5,8 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink, Github } from "lucide-react"
 import { Project } from "@/lib/projects"
+import type gsapType from "gsap"
 
-let gsapPromise: Promise<typeof gsap> | null = null
+let gsapPromise: Promise<typeof gsapType> | null = null
 
 const getGSAP = () => {
   if (!gsapPromise) {
@@ -23,14 +24,38 @@ interface Props {
   project: Project
 }
 
+function CaseStudyImage({ src, alt, priority = false, }: { src: string; alt: string; priority?: boolean; }) {
+  return (
+    <div className="cs-section relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg border border-[var(--border-color)]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        quality={85}
+        sizes="(max-width: 800px) 100vw, 768px"
+        className="object-cover object-top"
+      />
+    </div>
+  )
+}
+
 export const CaseStudyClient: React.FC<Props> = ({ project }) => {
   const heroRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let ctx: gsap.Context | null = null
+    let cancelled = false
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (prefersReduced) return
 
     getGSAP().then((gsap) => {
+      if (cancelled) return
       ctx = gsap.context(() => {
         // Hero fade up
         if (heroRef.current) {
@@ -61,11 +86,16 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
             )
           })
         }
-      })
+      }, contentRef)
     })
 
-    return () => ctx?.revert()
+    return () => {
+      cancelled = true
+      ctx?.revert()
+    }
   }, [])
+
+  const [hero, ...gallery] = project.images ?? []
 
   return (
     <article className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
@@ -179,7 +209,7 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
             </div>
           </section>
 
-          {project.images && (
+          {/* {project.images && (
             <div className="cs-section relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-16 shadow-lg border border-[var(--border-color,#e5e7eb)]">
               <Image
                 src={project.images[1]}
@@ -189,6 +219,13 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
                 sizes="(max-width: 768px) 100vw, 800px"
               />
             </div>
+          )} */}
+
+          {gallery[0] && (
+            <CaseStudyImage
+              src={gallery[0]}
+              alt={`${project.title} — interface detail`}
+            />
           )}
 
           {/* Challenges */}
@@ -217,7 +254,7 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
             </div>
           </section>
 
-          {project.images && (
+          {/* {project.images && (
             <div className="cs-section relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-16 shadow-lg border border-[var(--border-color,#e5e7eb)]">
               <Image
                 src={project.images[2]}
@@ -227,6 +264,13 @@ export const CaseStudyClient: React.FC<Props> = ({ project }) => {
                 sizes="(max-width: 768px) 100vw, 800px"
               />
             </div>
+          )} */}
+
+          {gallery[1] && (
+            <CaseStudyImage
+              src={gallery[1]}
+              alt={`${project.title} — outcome`}
+            />
           )}
 
           {/* Outcome */}
