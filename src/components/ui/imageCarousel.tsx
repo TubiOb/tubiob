@@ -318,7 +318,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
             aria-label="Previous image"
             className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
           >
-            <ChevronLeft size={22} />
+            <ChevronLeft size={12} />
           </button>
           <button
             type="button"
@@ -326,7 +326,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
             aria-label="Next image"
             className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
           >
-            <ChevronRight size={22} />
+            <ChevronRight size={12} />
           </button>
 
           {/* Dots */}
@@ -343,8 +343,8 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 aria-selected={index === currentIndex}
                 aria-label={`Go to image ${index + 1}`}
                 onClick={() => goTo(index, index > currentIndex ? 1 : -1)}
-                className={`h-2.5 rounded-full transition-all ${
-                  index === currentIndex ? "bg-white w-6" : "bg-white/60 hover:bg-white/80 w-2.5"
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex ? "bg-white" : "bg-white/60 hover:bg-white/80 w-2.5"
                 }`}
               />
             ))}
