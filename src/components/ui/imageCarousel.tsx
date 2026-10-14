@@ -316,7 +316,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
             type="button"
             onClick={handlePrev}
             aria-label="Previous image"
-            className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
+            className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center p-1 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
           >
             <ChevronLeft size={12} />
           </button>
@@ -324,7 +324,7 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
             type="button"
             onClick={handleNext}
             aria-label="Next image"
-            className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
+            className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center p-1 rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 active:scale-95 transition"
           >
             <ChevronRight size={12} />
           </button>
