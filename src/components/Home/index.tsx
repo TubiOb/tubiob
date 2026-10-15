@@ -160,8 +160,8 @@ export const Home: React.FC = () => {
               delay={0.6}
               // exitTo={{ x: -30, opacity: 1, duration: 0.2, ease: "power2.in" }}
             >
-              I build web products that solve real problems; insurance platforms, hiring tools, healthcare infrastructure, using Next.js and TypeScript.
-              I have a particular depth in products built for emerging markets, where performance, cost, and reliability aren&apos;t nice-to-haves.
+              I build products that handle money, roles, and real users. Three years shipping payment-integrated platforms across fintech, edtech, and healthcare, for
+              African where reliabilty matters more than polish.
             </TextReveal>
 
             <div className='flex flex-wrap gap-6 mt-6 justify-center lg:justify-start'>
@@ -180,7 +180,7 @@ export const Home: React.FC = () => {
             </div>
 
             <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">
-              {['Next.js', 'TypeScript', 'React', 'Firebase', 'Git'].map((tech) => (
+              {['Next.js', 'Paystack', 'Flutterwave', 'Multi-role SaaS', 'Firebase', 'Git'].map((tech) => (
                 <span key={tech} className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>{tech}</span>
               ))}
               {/* <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Next.js</span>

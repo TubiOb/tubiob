@@ -89,36 +89,6 @@ export const Timeline: React.FC = () => {
 
 
   return (
-    // <div className="relative wrap overflow-hidden p-10 h-full mt-16">
-    //   <div
-    //     className="border-2-2 absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full border"
-    //     style={{ left: "50%" }}
-    //   ></div>
-    //   {timelineEvents.map((event, index) => (
-    //     <motion.div
-    //       className={`mb-8 flex justify-between items-center w-full ${index % 2 === 0 ? "flex-row-reverse" : ""}`}
-    //       key={index}
-    //       initial={{ opacity: 0, y: 50 }}
-    //       animate={{ opacity: 1, y: 0 }}
-    //       transition={{ duration: 0.5, delay: index * 0.1 }}
-    //     >
-    //       <div className="order-1 w-5/12"></div>
-    //       <div className="z-20 flex items-center order-1 bg-[var(--bg-color)] shadow-sm shadow-[var(--card-color)] w-14 h-14 rounded-full">
-    //         <h1 className="mx-auto font-semibold text-lg text-[var(--muted-foreground)]">{event.date}</h1>
-    //       </div>
-    //       <div className="order-1 bg-[var(--card-color)] shadow-xl w-5/12 px-6 py-4 rounded-md">
-    //         <h3 className="mb-3 font-bold text-[var(--text-color)] text-xl">{event.title}</h3>
-    //         <p className="text-sm leading-snug tracking-wide text-[var(--title-color)]">
-    //           {event.description}
-    //         </p>
-    //       </div>
-    //     </motion.div>
-    //   ))}
-    // </div>
-
-
-
-
     <div ref={containerRef} className="mt-16">
       <h3 className="text-xl font-semibold mb-8 text-center md:text-left">My Journey</h3>
 

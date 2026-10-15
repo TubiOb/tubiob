@@ -221,7 +221,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const hiddenCount = project.stack.length - 5
 
   return (
-    <div ref={cardRef} className="bg-background rounded-lg shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full">
+    <div ref={cardRef} className="bg-background rounded-xl shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full">
       <ImageCarousel images={project.images} alt={project.title} />
 
       <div className="p-6 flex flex-col flex-grow">

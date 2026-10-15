@@ -297,7 +297,7 @@ export const About: React.FC = () => {
     return () => {
       ctx?.revert();
     }
-  }, [isClient])
+  }, [])
 
 
   return (
@@ -309,25 +309,27 @@ export const About: React.FC = () => {
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           <div ref={leftColumnRef}>
             <p className="mb-4">
-              I&#39;m a <span className="font-semibold text-[var(--text-color-green)]">Frontend Developer</span>
-              {" "}with 3+ years building production web applications across fintech, edtech, and healthcare. My work has involved multi-role authentication systems, payment integrations 
-              (<span className="font-mono bg-accent px-2 py-1 rounded">Flutterwave{" "}</span>
-              and{" "}<span className="font-mono bg-accent px-2 py-1 rounded">Paystack</span>), rich text editors, and real-time data; often for products with real users and real stakes.
+              I&#39;m a{" "}
+              <span className="font-semibold text-[var(--text-color-green)]">
+                Frontend Developer
+              </span>{" "}
+              with 3+ years building production web applications across fintech, edtech, and healthcare. My work has involved multi-role authentication systems, payment integrations 
+              (<span className="font-mono bg-accent px-2 py-1 rounded">Flutterwave</span>{" "}
+              and{" "}
+              <span className="font-mono bg-accent px-2 py-1 rounded">Paystack</span>),
+              rich text editors, and real-time data, often for products with real users and real stakes.
             </p>
             <p className="mb-4">
-              I work primarily in 
+              I work primarily in{" "}
               <span className="font-mono bg-accent px-2 py-1 rounded">Next.js</span>,{" "}
               <span className="font-mono bg-accent px-2 py-1 rounded">React</span>, and{" "}
               <span className="font-mono bg-accent px-2 py-1 rounded">TypeScript</span>
                 , and I care about the part most developers skip: what happens when the network is slow, the user is confused, or the business model changes.
             </p>
             <p className="mb-4">
-              I write code, break things, fix them, and somehow make it all work. I build user-friendly web experiences, 
-              focusing on{" "} accessibility and{" "} clean design. When I&#39;m not wrestling with React hooks, 
-              you&#39;ll find me arguing about <span className="text-[var(--text-color-light)] font-medium">Ronaldo (GOAT)</span> vs
-              Messi, watching <span className="text-[var(--text-color-light)] font-medium">Steph Curry&#39;s</span> basketball highlights,
-              or hoping <span className="text-[var(--text-color-light)] font-medium">Sir Lewis Hamilton</span> returns to winning F1
-              races.
+              Outside of code: <span className="text-[var(--text-color-light)] font-medium">Ronaldo (GOAT)</span> fan,{" "}
+              <span className="text-[var(--text-color-light)] font-medium">Steph Curry</span> admirer,{" "}
+              <span className="text-[var(--text-color-light)] font-medium">Sir Lewis Hamilton</span> hopeful.
             </p>
 
             {/* <p className="mb-4">
