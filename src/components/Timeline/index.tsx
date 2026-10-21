@@ -21,6 +21,11 @@ const timelineEvents = [
     description: "Picked up React after realizing vanilla JS couldn't handle the state-heavy, multi-role apps I wanted to build. Things started clicking.",
   },
   {
+    date: "2023",
+    title: "Frontend Developer at Incover Solution",
+    description: "Joined Incover Solution as a frontend developer, shipping production features across insurance and financial products for real users.",
+  },
+  {
     date: "2024",
     title: "Typescript & Professional Readiness",
     description: "Adopted Typescript across all projects after hitting too many runtime bugs. Started building with production habits: typed APIs, structured state, CI/CD",

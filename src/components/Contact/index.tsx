@@ -143,16 +143,19 @@ export const Contact: React.FC = () => {
         setSubmitStatus({ type: "success", message: result.message })
         // Reset form on success
         setFormData({ name: "", email: "", message: "" })
-      } else {
+      }
+      else {
         setSubmitStatus({ type: "error", message: result.message })
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error("Form submission error:", error)
       setSubmitStatus({
         type: "error",
         message: "An unexpected error occurred. Please try again.",
       })
-    } finally {
+    }
+    finally {
       setIsSubmitting(false)
     }
   }
@@ -164,6 +167,9 @@ export const Contact: React.FC = () => {
         <div>
           <h2 className="text-2xl font-semibold mb-2">Contact</h2>
           <span className="text-secondary">Get in touch</span>
+          <p className="mt-3 text-sm text-muted-foreground max-w-xl">
+            If you&apos;re building a product that needs payment integration, multi-role access, or a complex data layer, I&apos;d like to hear about it.
+          </p>
         </div>
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           <div

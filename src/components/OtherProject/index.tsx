@@ -21,14 +21,18 @@ const getGSAP = () => {
   return gsapPromise
 }
 
+const INITIAL_COUNT = 4
+
 export const OtherProject: React.FC = () => {
   // const [isClient, setIsClient] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
-  // const [otherProjects, setOtherProjects] = useState<Project[]>([])
+  const [showAll, setShowAll] = useState(false);
+  
   const otherProjects: Project[] = projects.filter((p) => !p.featured)
-  // const [isLoading, setIsLoading] = useState(true)
+  const visibleProjects = showAll ? otherProjects : otherProjects.slice(0, INITIAL_COUNT)
+  const hiddenCount = otherProjects.length - INITIAL_COUNT
 
 
   useEffect(() => {
@@ -89,6 +93,29 @@ export const OtherProject: React.FC = () => {
     }
   }, [otherProjects.length])
 
+
+  useEffect(() => {
+    if (!showAll || !projectsRef.current) return
+ 
+    getGSAP().then((gsap) => {
+      const allCards = projectsRef.current!.querySelectorAll(".project-card")
+      const newCards = Array.from(allCards).slice(INITIAL_COUNT)
+      if (newCards.length === 0) return
+ 
+      gsap.fromTo(
+        newCards,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      )
+    })
+  }, [showAll])
+
   if (otherProjects.length === 0) return null // Don't render anything if there are no other projects
 
   return (
@@ -100,12 +127,34 @@ export const OtherProject: React.FC = () => {
       </div>
 
       <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
-        {otherProjects.map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <div key={project.id} className="project-card">
             <ProjectCard project={project} index={index} />
           </div>
         ))}
       </div>
+
+      {!showAll && hiddenCount > 0 && (
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => setShowAll(true)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-[var(--border-color,#e5e7eb)] text-sm font-medium text-[var(--text-color)] hover:bg-[var(--card-color)] transition-colors"
+          >
+            Show {hiddenCount} more {hiddenCount === 1 ? "project" : "projects"}
+          </button>
+        </div>
+      )}
+ 
+      {showAll && otherProjects.length > INITIAL_COUNT && (
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => setShowAll(false)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-[var(--border-color,#e5e7eb)] text-sm font-medium text-muted-foreground hover:bg-[var(--card-color)] transition-colors"
+          >
+            Show less
+          </button>
+        </div>
+      )}
     </section>
   )
 }
