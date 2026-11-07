@@ -404,6 +404,44 @@ export const projects: Project[] = [
     featured: false,
   },
   {
+    id: "notionrides",
+    title: "NotionRides",
+    tagline: "A car rental management platform that replaces phone calls and social media with a real booking and payment system.",
+    description:
+      "A full car rental platform serving a business owner and multiple customers. Covers car inventory management, reservations for both account holders and guest users, Stripe payments, conflict resolution between soft and firm reservations, and a business analytics dashboard.",
+    bullets: [
+      "Built two separate reservation flows: soft-reserve for guest users (24-hour hold) and firm-reserve for account holders, with automatic priority override and guest notification",
+      "Integrated Stripe payment processing with deposit handling and payment history linked to user accounts",
+      "Implemented conflict handling logic: account holder reservation automatically cancels an active guest soft-reserve for the same car",
+      "Built the business owner dashboard with car inventory management, a dual-view reservations table (list and calendar), and analytics covering utilisation rate, revenue, and most-rented cars",
+    ],
+    role: "Frontend Developer",
+    problem: "Small car rental businesses in emerging markets run on manual processes: calls, social media DMs, cash payments, and spreadsheets. This leads to double-bookings, missed reservations, and no visibility into revenue or fleet utilisation. NotionRides centralised inventory, reservations, and payments into one system for a single owner serving multiple customers.",
+    keyDecisions: [
+      "Modelled two distinct reservation states (soft-reserve for guests, firm-reserve for account holders) rather than a single booking flow. Guest soft-reserves expire after 24 hours and are automatically overridden by account holder bookings, which required a clear state machine rather than a simple boolean flag.",
+      "Used Firebase Auth for session management rather than a custom auth layer; the team was working to a tight deadline and Firebase's social login and email verification covered the requirements without additional backend work.",
+      "Built the reservations view with both a table list and a calendar view, because the business owner needed to see both a detailed per-booking record and a visual occupancy overview.",
+    ],
+    challenges: [
+      {
+        challenge: "Guest users needed a meaningful reservation experience without an account, but their reservations had to be clearly lower-priority than account holder bookings for the same car on the same dates.",
+        solution: "Implemented a soft-reserve system with a 24-hour hold, clearly communicated in the confirmation email, and built the conflict resolution so an account holder booking automatically cancels the guest hold and triggers a cancellation notification.",
+      },
+      {
+        challenge: "The business owner needed analytics that were actionable, not just decorative: metrics like utilisation rate (cars booked divided by cars available) and most-rented cars required aggregating across reservations, not just counting rows.",
+        solution: "Computed utilisation rate and rental frequency client-side from the reservations dataset, grouping by car ID and date range, and displayed them in a clean summary dashboard alongside total revenue and active booking counts.",
+      },
+    ],
+    outcome: "Delivered a working full-stack car rental platform with guest and account-based reservation flows, Stripe payment processing, conflict resolution, and a business owner analytics dashboard.",
+    whatILearned: "Reservation systems look simple until you add time, state, and multiple user types. The soft-reserve versus firm-reserve distinction forced me to think about state machines rather than CRUD; a booking is not just a row, it has a lifecycle with real consequences for real users.",
+    images: ['/img/NotionRides1.png', '/img/NotionRides2.png', '/img/NotionRides3.png', '/img/NotionRides4.png', '/img/NotionRides5.png', '/img/NotionRides6.png', '/img/NotionRides7.png'],
+    demoUrl: '',
+    codeUrl: '',
+    caseStudyUrl: "/case-study/notionrides",
+    stack: ["React.js", "TypeScript", "Tailwind CSS", 'Tanstack React Table', 'Stripe API', 'Lucide React'],
+    featured: false,
+  },
+  {
     id: "playcv",
     title: "PlayCV",
     tagline: "Helping Nigerian graduates get noticed by employers through video CVs.",
