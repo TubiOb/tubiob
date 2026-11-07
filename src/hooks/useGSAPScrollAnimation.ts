@@ -102,7 +102,7 @@
 
 import type React from "react"
 import { useEffect, useRef } from "react"
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 type ScrollAnimationOptions = {
   trigger?: string | Element

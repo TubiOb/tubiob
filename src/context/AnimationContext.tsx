@@ -322,9 +322,7 @@ export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         mainTimeline.current.kill()
       }
       if (typeof window !== 'undefined') {
-        import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-          ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-        })
+        mainTimeline.current?.kill()
       }
     }
   }, [])

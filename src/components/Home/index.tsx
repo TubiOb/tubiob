@@ -31,7 +31,6 @@ export const Home: React.FC = () => {
   const [gsapInstance, setGsapInstance] = useState<typeof gsap | null>(null)
   const profileRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const featuredProjectRef = useRef<HTMLDivElement>(null);
   const homeContentRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -79,16 +78,6 @@ export const Home: React.FC = () => {
     }
   }, [registerAnimation, gsapInstance])
 
-
-
-  useGSAPScrollAnimation(featuredProjectRef, {
-    start: 'top 90%',
-    end: "bottom 90%",
-    toggleActions: 'play pause play pause',
-    from: { opacity: 0, y: 50 },
-    to: { opacity: 1, y: 0, duration: 1, ease: "power.easeOut" },
-    exitTo: { opacity: 0.5, y: -40, duration: 1, ease: "power.easeIn" },
-  })
 
   useEffect(() => {
     if (!sectionRef.current || !gsapInstance) return
@@ -161,7 +150,7 @@ export const Home: React.FC = () => {
               // exitTo={{ x: -30, opacity: 1, duration: 0.2, ease: "power2.in" }}
             >
               I build products that handle money, roles, and real users. Three years shipping payment-integrated platforms across fintech, edtech, and healthcare, for
-              African where reliabilty matters more than polish.
+              African markets where reliability matters more than polish.
             </TextReveal>
 
             <div className='flex flex-wrap gap-6 mt-6 justify-center lg:justify-start'>
@@ -180,7 +169,7 @@ export const Home: React.FC = () => {
             </div>
 
             <div className="mt-6 text-sm text-[var(--text-color-light)] flex flex-wrap gap-4 lg:gap-6">
-              {['Next.js', 'Paystack', 'Flutterwave', 'Multi-role SaaS', 'Firebase', 'Git'].map((tech) => (
+              {['Next.js', 'Paystack', 'Flutterwave', 'Multi-role SaaS', 'TypeScript'].map((tech) => (
                 <span key={tech} className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>{tech}</span>
               ))}
               {/* <span className='py-0.5 px-2 rounded-full items-center text-center border border-neutral-50'>Next.js</span>
